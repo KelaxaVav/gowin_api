@@ -1,0 +1,16 @@
+[
+    {
+        "user_id": "926713fb-15b4-405c-8108-3d69db4cbc1a",
+        "staff_no": "SA0000",
+        "name": "Super Admin",
+        "email": "sadmin@gmail.com",
+        "mobile": "123456789",
+        "nic": "superadmin",
+        "password": "12345678",
+        "settings": {
+            "salary": 100000
+        },
+        "status": "ACTIVE",
+        "role_id": "fe54ec7c-dba5-4e75-9e39-6ea5fa74c535"
+    }
+]

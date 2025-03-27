@@ -1,0 +1,106 @@
+{
+  "id": 6,
+  "invoice_id": "485b5aec-4904-423d-a535-5809c841bac7",
+  "discount_type": null,
+  "discount_value": 0,
+  "delivery_at": "2024-11-12T11:40:49.000Z",
+  "type": "CUSTOMER",
+  "status": "COMPLETED",
+  "created_at": "2024-11-21T13:28:02.000Z",
+  "updated_at": "2024-11-21T13:28:02.000Z",
+  "deleted_at": null,
+  "party_id": "85a1f60c-5ae3-4fed-89f6-1f04669e8816",
+  "branch_id": "9ec72f38-2534-49e3-99d6-d9250961b5a5",
+  "invoiceItems": [
+    {
+      "invoice_item_id": "39768754-fa5c-44f1-909c-b0a7e6e6d0b8",
+      "price": 100,
+      "quantity": 20,
+      "batch_id": "32765fac-0a8e-46a4-8a0e-022b1a753681",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "42cd0b75-4682-491d-b30f-233ee433bf8a",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "41cceb00-f420-413a-989d-76df173339d3",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "4e94a464-fcce-4de5-ad79-495ae5422dc3",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "28b095d5-44c8-4554-99c2-63b12829dfea",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "53237f58-0eda-4c0f-9119-b0713378f177",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "fd788eb4-20b9-4156-a08c-d02a1eb82ba9",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "59d29ef2-3ced-41f8-b6f6-96a5a6d06f08",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "b26704b4-b94d-41a6-b2c0-f4d4c381a41f",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "5d149b1f-66ea-4998-a0aa-057ebb954cc9",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "190149d9-1030-4e16-9bdd-d53073cda5f2",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "a95d9c1f-3305-49ae-b02f-473b960e63fc",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "955f1674-db6b-4d2a-aad1-a19e6ff10f03",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "a96484f3-569a-4cf2-a70f-ee424c173bdf",
+      "price": 5,
+      "quantity": 3,
+      "batch_id": "804310e4-5b67-4a7a-90bf-05d6b652ea67",
+      "customItem": {
+        "d86aab09-bed0-4ddd-9058-840a5f6efaf9": {
+          "value": "a0c4a459-a9cb-4a98-b4cb-f83eea9a844d",
+          "children": null
+        }
+      },
+      "type": "CUSTOM"
+    },
+    {
+      "invoice_item_id": "cc78b64f-262a-4121-9524-1b02b7d87b28",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "5df3ea99-b96e-4add-8379-fbdf348dc75c",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "f19fae07-1eee-41b9-a479-0bd6ec064c8f",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "37d0e65d-25e0-4677-96c0-b06c1b3161a3",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "f1c14484-1c23-4d78-81c1-ab4838cc9d11",
+      "price": 10,
+      "quantity": 2,
+      "batch_id": "37ce76c4-dc46-4965-8d09-111bb843e9fa",
+      "type": "GENERIC"
+    },
+    {
+      "invoice_item_id": "f76f329e-169c-46d6-8e58-7724d9116246",
+      "price": 20,
+      "quantity": 2,
+      "batch_id": "f20b65a0-1eae-4df6-98da-b0206ddec7e3",
+      "type": "GENERIC"
+    }
+  ]
+}

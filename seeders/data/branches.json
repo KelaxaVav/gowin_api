@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "branch_id": "9ec72f38-2534-49e3-99d6-d9250961b5a5",
+    "name": "Kurumankadu",
+    "code": "KUR",
+    "contact": [
+      "0771234568"
+    ],
+    "address": "Kurumankadu, Vavuniya",
+    "settings": {
+      "reward": {
+        "value": 1,
+        "status": true
+      }
+    }
+  }
+]

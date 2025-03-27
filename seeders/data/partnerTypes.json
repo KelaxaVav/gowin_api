@@ -1,0 +1,37 @@
+[
+    {
+        "partner_type_id": "c46a051d-bab2-4d49-8700-eac65903d1e0",
+        "name": "Finance Executive",
+        "is_active": true
+    },
+    {
+        "partner_type_id": "8c00d40d-3fc6-4b59-832c-111db76adab2",
+        "name": "RTO Consultant",
+        "is_active": true
+    },
+    {
+        "partner_type_id": "c20c3d79-14b0-4d19-b96f-6ad75eb1dbdd",
+        "name": "Postal Agents",
+        "is_active": true
+    },
+    {
+        "partner_type_id": "19b8503b-7639-4ff1-932c-4201815ef3b7",
+        "name": "LIC Agents",
+        "is_active": true
+    },
+    {
+        "partner_type_id": "4a088cd3-d22c-4ea0-ace8-89eb93bdac7e",
+        "name": "Retail Agents",
+        "is_active": true
+    },
+    {
+        "partner_type_id": "dd0b4a85-8c85-46e5-bba8-3d451c8bc2cd",
+        "name": "Schools",
+        "is_active": true
+    },
+    {
+        "partner_type_id": "b853d84e-193e-408a-badf-2a9b74b6c63f",
+        "name": "Fleet Owner",
+        "is_active": true
+    }
+]

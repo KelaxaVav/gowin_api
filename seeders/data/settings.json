@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "setting_id": "5a01e437-16cd-45b6-a2d0-026920040c5d",
+    "name": "GENERAL",
+    "type": "COMPANY",
+    "data": {
+      "logo": "/images/logo.jpg",
+      "name": "Luxury Cake",
+      "email": "info@luxurycake.lk",
+      "tagline": "Cake Shop"
+    }
+  }
+]

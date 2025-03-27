@@ -1,0 +1,497 @@
+[
+  {
+    "id": 1,
+    "batch_id": "0179a915-a7f2-4534-9a37-01e72d7804d7",
+    "item_id": "51c13731-7feb-425e-838f-8c62287a927c",
+    "price": "287",
+    "sign": "POSITIVE",
+    "quantity": "5",
+    "price_min": "277"
+  },
+  {
+    "id": 2,
+    "batch_id": "084a914b-ccc9-4b2f-86e1-f64609c7b5ae",
+    "item_id": "a5b5e3ff-0083-4e2b-ace7-1fcaf2a899b2",
+    "price": "994",
+    "sign": "POSITIVE",
+    "quantity": "10",
+    "price_min": "984"
+  },
+  {
+    "id": 3,
+    "batch_id": "087ba7d3-b431-472d-af1a-4091d8f3e52c",
+    "item_id": "dceaeec5-0732-41c1-afb8-fbd5b8d2da00",
+    "price": "100",
+    "sign": "POSITIVE",
+    "quantity": "498",
+    "price_min": null
+  },
+  {
+    "id": 4,
+    "batch_id": "1af7b175-85db-442d-9c1a-43de08c5f082",
+    "item_id": "83a1cee9-b0c3-44ce-83da-144909c9f52c",
+    "price": "820",
+    "sign": "POSITIVE",
+    "quantity": "5",
+    "price_min": "810"
+  },
+  {
+    "id": 5,
+    "batch_id": "1dfd68dc-1192-4b86-a9e4-5260ba8701ec",
+    "item_id": "51c13731-7feb-425e-838f-8c62287a927c",
+    "price": "386",
+    "sign": "POSITIVE",
+    "quantity": "6",
+    "price_min": "376"
+  },
+  {
+    "id": 6,
+    "batch_id": "28b095d5-44c8-4554-99c2-63b12829dfea",
+    "item_id": "016e9ae4-e7b9-44dc-a076-13f0522733ae",
+    "price": "720",
+    "sign": "POSITIVE",
+    "quantity": "2",
+    "price_min": "710"
+  },
+  {
+    "id": 7,
+    "batch_id": "32765fac-0a8e-46a4-8a0e-022b1a753681",
+    "item_id": "016e9ae4-e7b9-44dc-a076-13f0522733ae",
+    "price": "221",
+    "sign": "POSITIVE",
+    "quantity": "9",
+    "price_min": "211"
+  },
+  {
+    "id": 8,
+    "batch_id": "3352fad9-6b1d-48a4-a719-edd444965a9f",
+    "item_id": "b9730eaa-0414-4fd2-b970-8dcce95580b0",
+    "price": "300",
+    "sign": "POSITIVE",
+    "quantity": "99",
+    "price_min": null
+  },
+  {
+    "id": 9,
+    "batch_id": "335d2dca-6ba4-4f20-b07d-05d98e74a099",
+    "item_id": "4da06369-4c8b-41b4-af2b-27cca6e826ea",
+    "price": "200",
+    "sign": "POSITIVE",
+    "quantity": "99",
+    "price_min": null
+  },
+  {
+    "id": 10,
+    "batch_id": "34f0a515-ad2a-49f5-8ad0-54df2517ae36",
+    "item_id": "0cc9737f-d9d0-4288-8be4-cce6bd36d987",
+    "price": "1230",
+    "sign": "POSITIVE",
+    "quantity": "0",
+    "price_min": "1180"
+  },
+  {
+    "id": 11,
+    "batch_id": "3689ce15-65ef-4c5a-9abf-be76e8a6ffd8",
+    "item_id": "d789752f-4fc1-42a7-b876-7de11f6b942b",
+    "price": "50",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 12,
+    "batch_id": "37ce76c4-dc46-4965-8d09-111bb843e9fa",
+    "item_id": "83b3bcb8-67f7-49df-933c-61f76ba7ab52",
+    "price": "611",
+    "sign": "POSITIVE",
+    "quantity": "0",
+    "price_min": "601"
+  },
+  {
+    "id": 13,
+    "batch_id": "3cab1317-fa6e-4139-b23f-d091cf2b9895",
+    "item_id": "ca55ddf2-5b1d-4a7f-9654-82da4b7c1173",
+    "price": "130",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 14,
+    "batch_id": "41cceb00-f420-413a-989d-76df173339d3",
+    "item_id": "f885ae02-7270-4295-ad3f-3a3a07553d46",
+    "price": "471",
+    "sign": "POSITIVE",
+    "quantity": "9",
+    "price_min": "461"
+  },
+  {
+    "id": 15,
+    "batch_id": "532beabd-09b2-4b3a-accf-e8afb1b4143c",
+    "item_id": "3ba46170-1b3a-4970-a029-17aa042bb33f",
+    "price": "80",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 16,
+    "batch_id": "54db086a-0baa-4963-83a7-f34dabf40095",
+    "item_id": "0cc9737f-d9d0-4288-8be4-cce6bd36d987",
+    "price": "1230",
+    "sign": "POSITIVE",
+    "quantity": "0",
+    "price_min": null
+  },
+  {
+    "id": 17,
+    "batch_id": "5c3da92d-497f-4eea-bdb2-317d08fdfafc",
+    "item_id": "1b0f1d26-4a7d-4541-89d4-33d4ebe3365e",
+    "price": "130",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 18,
+    "batch_id": "5df3ea99-b96e-4add-8379-fbdf348dc75c",
+    "item_id": "f885ae02-7270-4295-ad3f-3a3a07553d46",
+    "price": "839",
+    "sign": "POSITIVE",
+    "quantity": "6",
+    "price_min": "829"
+  },
+  {
+    "id": 19,
+    "batch_id": "60d73676-4e32-4440-9a1a-fb701856a720",
+    "item_id": "a0b1cc2a-5de8-4a63-af42-0708ba0460cd",
+    "price": "500",
+    "sign": "POSITIVE",
+    "quantity": "78",
+    "price_min": null
+  },
+  {
+    "id": 20,
+    "batch_id": "60db9090-7861-4f40-9575-96997945c85c",
+    "item_id": "88f17dae-9f4b-4a29-a4bc-d8fa6979b314",
+    "price": "120",
+    "sign": "POSITIVE",
+    "quantity": "200",
+    "price_min": null
+  },
+  {
+    "id": 21,
+    "batch_id": "6232227f-c2bf-4c35-9860-5af09a46bd78",
+    "item_id": "c1d1df16-f991-4d7f-a57f-e4c28b16db72",
+    "price": "300",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 22,
+    "batch_id": "691ef73e-e74e-44e3-abf6-98bbcc30cd35",
+    "item_id": "d4116452-a6ab-4f39-9bfe-20220136a296",
+    "price": "540",
+    "sign": "POSITIVE",
+    "quantity": "540",
+    "price_min": null
+  },
+  {
+    "id": 23,
+    "batch_id": "694845a9-44cd-48db-93bf-4220ccc2aef3",
+    "item_id": "66b7048d-a941-4e6b-8b81-f247b2205f23",
+    "price": "25",
+    "sign": "POSITIVE",
+    "quantity": "1",
+    "price_min": "25"
+  },
+  {
+    "id": 24,
+    "batch_id": "6c7264d3-e78e-4fa6-a8cc-bbad793dbefa",
+    "item_id": "101d3132-a8e7-4b50-959e-0d09c515377a",
+    "price": "625",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 25,
+    "batch_id": "7189ac0c-2c79-414f-8040-28b7212a0763",
+    "item_id": "4ea311b4-467b-46fe-87b9-8df236c7bd1b",
+    "price": "50",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 26,
+    "batch_id": "7630b27f-1e6a-4580-b34d-78449787a3ce",
+    "item_id": "83a1cee9-b0c3-44ce-83da-144909c9f52c",
+    "price": "565",
+    "sign": "POSITIVE",
+    "quantity": "8",
+    "price_min": "555"
+  },
+  {
+    "id": 27,
+    "batch_id": "7fba270d-8fa9-4062-b236-8353dcd46664",
+    "item_id": "2e833546-75c4-4fef-a43c-8c5560db6950",
+    "price": "80",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 28,
+    "batch_id": "862f6581-454b-4c06-90be-d6e3608af016",
+    "item_id": "429ba977-0a90-4e16-bfe2-77545dfd7584",
+    "price": "60",
+    "sign": "POSITIVE",
+    "quantity": "98",
+    "price_min": null
+  },
+  {
+    "id": 29,
+    "batch_id": "8c677159-c730-49c1-8a84-2ea18b417f93",
+    "item_id": "a5b5e3ff-0083-4e2b-ace7-1fcaf2a899b2",
+    "price": "456",
+    "sign": "POSITIVE",
+    "quantity": "7",
+    "price_min": "446"
+  },
+  {
+    "id": 30,
+    "batch_id": "93fcd03c-49ba-4a26-bd51-15b81001180b",
+    "item_id": "baf64344-22af-4f37-994f-fdfa3ebc6d70",
+    "price": "50",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 31,
+    "batch_id": "955f1674-db6b-4d2a-aad1-a19e6ff10f03",
+    "item_id": "83b3bcb8-67f7-49df-933c-61f76ba7ab52",
+    "price": "801",
+    "sign": "POSITIVE",
+    "quantity": "6",
+    "price_min": "791"
+  },
+  {
+    "id": 32,
+    "batch_id": "98fd9a83-fca4-4a39-af8a-910f54994475",
+    "item_id": "b574ca9e-60f8-4835-94f8-b837b62c8335",
+    "price": "150",
+    "sign": "POSITIVE",
+    "quantity": "500",
+    "price_min": null
+  },
+  {
+    "id": 34,
+    "batch_id": "a85127b7-7d2e-4fb0-8f9e-46c8d821abe1",
+    "item_id": "37aee0e5-3b64-4970-baa1-9d2e5388ecbf",
+    "price": "919",
+    "sign": "POSITIVE",
+    "quantity": "8",
+    "price_min": "909"
+  },
+  {
+    "id": 35,
+    "batch_id": "aa3b6b9e-3af2-44e3-8374-a6511ac1fb57",
+    "item_id": "1035c322-43aa-4455-9164-410d946b948d",
+    "price": "565",
+    "sign": "POSITIVE",
+    "quantity": "9",
+    "price_min": "555"
+  },
+  {
+    "id": 36,
+    "batch_id": "ab21cc2f-6697-4dfa-a677-d8287774ce7c",
+    "item_id": "fbed1368-b3ea-45e6-9d8d-235d4ad1ce06",
+    "price": "160",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 37,
+    "batch_id": "b1a8407a-32ab-4e3d-a26e-c34272df66f6",
+    "item_id": "5dbf027d-9885-4590-9664-2a89118b97a0",
+    "price": "200",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 38,
+    "batch_id": "b3796d12-7a47-48c6-9c52-7d836631fc30",
+    "item_id": "37aee0e5-3b64-4970-baa1-9d2e5388ecbf",
+    "price": "421",
+    "sign": "POSITIVE",
+    "quantity": "7",
+    "price_min": "411"
+  },
+  {
+    "id": 39,
+    "batch_id": "b4760096-2238-4a8a-b834-9d56ba695832",
+    "item_id": "a4201a38-76fe-4f3c-b851-90beb9053f7e",
+    "price": "60",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 40,
+    "batch_id": "b64ea525-1a11-4dd9-9f78-cc2907ca25fd",
+    "item_id": "1d2d1ed8-63da-4366-ae0c-7e2de7adadb2",
+    "price": "160",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 41,
+    "batch_id": "be0643b3-4534-43aa-9652-6cc5f63e2fcb",
+    "item_id": "0cc9737f-d9d0-4288-8be4-cce6bd36d987",
+    "price": "1230",
+    "sign": "POSITIVE",
+    "quantity": "99",
+    "price_min": "1230"
+  },
+  {
+    "id": 42,
+    "batch_id": "ce476fe1-9619-430a-b751-e6d20a539f3c",
+    "item_id": "c1d1df16-f991-4d7f-a57f-e4c28b16db72",
+    "price": "350",
+    "sign": "POSITIVE",
+    "quantity": "99",
+    "price_min": "350"
+  },
+  {
+    "id": 43,
+    "batch_id": "cf4f6966-bab2-47ed-9303-bf5b1a64ae34",
+    "item_id": "a43de63d-c31f-41c6-9d46-818d2c83a32a",
+    "price": "60",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 44,
+    "batch_id": "d080e69c-648a-4e97-b823-cc430fdae5ee",
+    "item_id": "8b3b28fb-37b4-4c70-b7d2-e4b80144aa87",
+    "price": "220",
+    "sign": "POSITIVE",
+    "quantity": "499",
+    "price_min": null
+  },
+  {
+    "id": 45,
+    "batch_id": "d272f598-036b-487f-8ed2-b08dc8f322ba",
+    "item_id": "37aee0e5-3b64-4970-baa1-9d2e5388ecbf",
+    "price": "144",
+    "sign": "POSITIVE",
+    "quantity": "8",
+    "price_min": "134"
+  },
+  {
+    "id": 46,
+    "batch_id": "d7d056d7-98c0-4fe1-b6a5-58548d940f8a",
+    "item_id": "1035c322-43aa-4455-9164-410d946b948d",
+    "price": "891",
+    "sign": "POSITIVE",
+    "quantity": "4",
+    "price_min": "881"
+  },
+  {
+    "id": 47,
+    "batch_id": "db9beb1c-d317-4c5e-93be-bf8c548f9be5",
+    "item_id": "1af9ba1f-8f1f-45e1-832c-30e84f0e9214",
+    "price": "160",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 48,
+    "batch_id": "dc53b138-81a3-45a5-8e06-8d50098d9b2f",
+    "item_id": "a8bc98ca-2b66-4074-a03c-a0e7bfe17c6c",
+    "price": "25",
+    "sign": "POSITIVE",
+    "quantity": "50",
+    "price_min": null
+  },
+  {
+    "id": 49,
+    "batch_id": "e6778017-de23-4dc1-b451-d21a620182fe",
+    "item_id": "548fad6d-b2fa-4665-9750-a79f3a744255",
+    "price": "1800",
+    "sign": "POSITIVE",
+    "quantity": "0",
+    "price_min": null
+  },
+  {
+    "id": 50,
+    "batch_id": "e9e66a26-024e-45de-8134-fe355165435d",
+    "item_id": "ca6c00d2-8c22-4502-9460-7268e74c81b1",
+    "price": "1000",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 51,
+    "batch_id": "ea79c9d6-1542-4868-97eb-64dab383e681",
+    "item_id": "cff39707-27a5-4015-b1ad-32759669a61f",
+    "price": "280",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 52,
+    "batch_id": "f20b65a0-1eae-4df6-98da-b0206ddec7e3",
+    "item_id": "1035c322-43aa-4455-9164-410d946b948d",
+    "price": "718",
+    "sign": "POSITIVE",
+    "quantity": "7",
+    "price_min": "708"
+  },
+  {
+    "id": 53,
+    "batch_id": "f61d4853-22e7-43a3-ba7b-8686d13a26af",
+    "item_id": "6b111d66-814e-43a0-aa2c-0a741a988121",
+    "price": "25",
+    "sign": "POSITIVE",
+    "quantity": "100",
+    "price_min": null
+  },
+  {
+    "id": 54,
+    "batch_id": "f795f7df-e382-4024-a8ca-b7a5a5d78510",
+    "item_id": "ea34a091-6bfc-4c4c-abb3-787f3c3e66b5",
+    "price": "1700",
+    "sign": "POSITIVE",
+    "quantity": "7",
+    "price_min": "1700"
+  },
+  {
+    "id": 55,
+    "batch_id": "fb19770b-df48-45fc-a636-29e95d263185",
+    "item_id": "5f63d711-1b24-4813-b079-2bd928e6cceb",
+    "price": "350",
+    "sign": "POSITIVE",
+    "quantity": "798",
+    "price_min": null
+  },
+  {
+    "id": 56,
+    "batch_id": "fd788eb4-20b9-4156-a08c-d02a1eb82ba9",
+    "item_id": "83b3bcb8-67f7-49df-933c-61f76ba7ab52",
+    "price": "25",
+    "sign": "POSITIVE",
+    "quantity": "2",
+    "price_min": "15"
+  }
+]

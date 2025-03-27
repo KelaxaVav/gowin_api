@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "template_id": "068139e2-62bb-4de7-8823-ca686118f8cd",
+    "name": "CUSTOMER_ORDER_DELIVERED",
+    "type": "SMS",
+    "branch_id": null,
+    "status": "1",
+    "data": {
+      "ENGLISH": {
+        "body": "Dear {{CUSTOMER_NAME}}, your custom order {{CUSTOM_ORDER_NO}} has been delivered. Thank you for shopping at {{COMPANY_NAME}}. Enjoy your purchase!"
+      }
+    }
+  },
+  {
+    "id": 2,
+    "template_id": "4c8bf059-7de6-4b8f-9c8c-673de0c6e215",
+    "name": "CUSTOMER_INVOICE_PLACED",
+    "type": "SMS",
+    "branch_id": null,
+    "status": "1",
+    "data": {
+      "ENGLISH": {
+        "body": "Hi {{CUSTOMER_NAME}}, thank you for your purchase {{INVOICE_NO}} with {{COMPANY_NAME}}! You've earned {{REWARD}} as part of our rewards program. Your total rewards balance is now {{TOTAL_REWARDS}}. Use them on your next purchase. Enjoy shopping! For assistance, contact {{CONTACT}}"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "template_id": "4f2f85cc-b220-439e-af4a-a974c3f575e0",
+    "name": "CUSTOMER_ORDER_PROCESSING",
+    "type": "SMS",
+    "branch_id": null,
+    "status": "1",
+    "data": {
+      "ENGLISH": {
+        "body": "Hi {{CUSTOMER_NAME}}, your custom order {{CUSTOM_ORDER_NO}} is now being processed. We'll keep you updated at every step. Thank you for choosing {{COMPANY_NAME}}!"
+      }
+    }
+  },
+  {
+    "id": 4,
+    "template_id": "c9f1a3c9-a769-4f45-996c-2d948634fb02",
+    "name": "CUSTOMER_INVOICE_DELIVERED",
+    "type": "SMS",
+    "branch_id": null,
+    "status": "1",
+    "data": {
+      "ENGLISH": {
+        "body": "Hi {{CUSTOMER_NAME}}, Your order {{CUSTOM_ORDER_NO}} has been successfully completed. Thank you for choosing {{COMPANY_NAME}}!"
+      }
+    }
+  },
+  {
+    "id": 5,
+    "template_id": "daa5d5a8-3079-4154-a702-99f9c312a60e",
+    "name": "CUSTOMER_ORDER_PLACED",
+    "type": "SMS",
+    "branch_id": null,
+    "status": "1",
+    "data": {
+      "ENGLISH": {
+        "body": "Hi {{CUSTOMER_NAME}}, your custom order {{CUSTOM_ORDER_NO}} is placed successfully. We'll keep you updated at every step. Thank you for choosing {{COMPANY_NAME}}!"
+      }
+    }
+  },
+  {
+    "id": 6,
+    "template_id": "e829ad89-ae99-4af6-9358-130126b0df23",
+    "name": "CUSTOMER_ORDER_COMPLETED",
+    "type": "SMS",
+    "branch_id": null,
+    "status": "1",
+    "data": {
+      "ENGLISH": {
+        "body": "Good news, {{CUSTOMER_NAME}}! Your custom order {{CUSTOM_ORDER_NO}} has been successfully completed. Thank you for shopping with us!"
+      }
+    }
+  }
+]

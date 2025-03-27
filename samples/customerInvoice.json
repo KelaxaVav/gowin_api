@@ -1,0 +1,36 @@
+{
+    "type": "CUSTOMER",
+    "party_id": "",
+    "name": "Linthu",
+    "mobile": "768911918",
+    "discount_type": null,
+    "discount_value": 0,
+    "advance": 100,
+    "delivery_at": "2024-11-12T11:40:49",
+    "status": "COMPLETED",
+    "invoiceItems": [
+        {
+            "type": "GENERIC",
+            "price": 100,
+            "quantity": 2,
+            "batch_id": "37ce76c4-dc46-4965-8d09-111bb843e9fa"
+        },
+        {
+            "type": "GENERIC",
+            "price": 200,
+            "quantity": 8,
+            "batch_id": "41cceb00-f420-413a-989d-76df173339d3"
+        },
+        {
+            "type": "CUSTOM",
+            "price": 500,
+            "quantity": 3,
+            "customItem": {
+                "d86aab09-bed0-4ddd-9058-840a5f6efaf9": {
+                    "value": "a0c4a459-a9cb-4a98-b4cb-f83eea9a844d",
+                    "children": null
+                }
+            }
+        }
+    ]
+}
