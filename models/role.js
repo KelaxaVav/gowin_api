@@ -28,11 +28,11 @@ module.exports = (sequelize) => {
         as: 'rolePermissions',
       });
 
-      // User
-      Role.hasMany(models.User, {
+      // Staff
+      Role.hasMany(models.Staff, {
         foreignKey: 'role_id',
         sourceKey: 'role_id',
-        as: 'users',
+        as: 'staffs',
       });
     }
   }

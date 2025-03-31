@@ -15,18 +15,10 @@ module.exports = (apiController, useTransaction = true) => {
         }
 
         try {
-            const system = await User.findOne({
-                where: {
-                    email: 'system@api.com',
-                },
-            });
-            req.system = system;
-
             await apiController(req, res, {
                 next,
                 transaction,
                 user_id: req.auth?.user_id,
-                system_id: req.system?.user_id,
             });
             if (useTransaction && !transaction.finished) {
                 await transaction.rollback();

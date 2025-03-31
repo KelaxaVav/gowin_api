@@ -4,7 +4,19 @@ const { defaultKeys, modelDefaults } = require('../sequelize/defaults');
 module.exports = (sequelize) => {
   class Team extends Model {
     static associate(models) {
-    
+      // Branch
+      Team.belongsTo(models.Branch, {
+        foreignKey: 'branch_id',
+        targetKey: 'branch_id',
+        as: 'branch',
+      });
+
+      // Staff
+      Team.hasMany(models.Staff, {
+        foreignKey: 'team_id',
+        sourceKey: 'team_id',
+        as: 'staffs',
+      });
     }
   }
   Team.init({
@@ -19,7 +31,6 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
   }, modelDefaults(sequelize, 'teams'));
-
 
   return Team;
 };

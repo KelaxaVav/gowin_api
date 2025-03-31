@@ -4,6 +4,8 @@ const { User } = require('../models');
 module.exports = {
   async up(queryInterface, Sequelize) {
     try {
+      return
+
       const data = require('./data/users.json');
       data.forEach((d, i) => {
         d.id = i + 2;

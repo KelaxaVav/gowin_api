@@ -1,18 +1,20 @@
 'use strict';
-const { Customer } = require('../models');
+const { Position } = require('../models');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     try {
-      const data = require('./data/customers.json');
+      return
 
-      await Customer.bulkCreate(data);
+      const data = require('./data/positions.json');
+
+      await Position.bulkCreate(data);
     } catch (error) {
       console.log(`error`, error);
     }
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('customers', null, {});
+    await queryInterface.bulkDelete('designations', null, {});
   }
 };

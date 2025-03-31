@@ -1,6 +1,5 @@
 'use strict';
-const { USER_STATUSES } = require('../data/constants');
-const { defaultKeys, migrationDefaults, relationShip } = require('../sequelize/defaults');
+const { defaultKeys, migrationDefaults } = require('../sequelize/defaults');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -10,11 +9,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      password_hash: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      user_id: {
+      password: {
         type: Sequelize.STRING,
         allowNull: false,
       },

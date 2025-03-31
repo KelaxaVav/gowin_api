@@ -1,4 +1,4 @@
-const { Branch } = require("../../models");
+const { Branch, Region } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
@@ -6,20 +6,12 @@ const { whereSearchAndFilter } = require("../../helper/common");
 const BranchService = require("../../services/branch");
 
 const create = routeHandler(async (req, res, extras) => {
-	const {
-		name,
-		contact,
-		address,
-		code,
-		settings,
-	} = req.body;
+	const { name, region_id, is_active } = req.body;
 
 	const branch = await BranchService.createBranch({
 		name,
-		contact,
-		address,
-		code,
-		settings,
+		region_id,
+		is_active,
 	}, extras);
 
 	await extras.transaction.commit();
@@ -32,6 +24,12 @@ const getAll = routeHandler(async (req, res, extras) => {
 	const branches = await Branch.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
+		include: [
+			{
+				model: Region,
+				as: 'region',
+			},
+		],
 		where: whereOption,
 	});
 

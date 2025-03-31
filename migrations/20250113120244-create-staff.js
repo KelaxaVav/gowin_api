@@ -34,7 +34,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      
       pin_code: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -44,6 +43,10 @@ module.exports = {
         defaultValue: true,
         allowNull: false,
       },
+      role_id: relationShip({
+        modelName: "roles",
+        key: "role_id",
+      }),
       branch_id: relationShip({
         modelName: "branches",
         key: "branch_id",
@@ -51,10 +54,17 @@ module.exports = {
       designation_id: relationShip({
         modelName: "designations",
         key: "designation_id",
+        allowNull: true,
       }),
       city_id: relationShip({
         modelName: "cities",
         key: "city_id",
+        allowNull: true,
+      }),
+      team_id: relationShip({
+        modelName: "teams",
+        key: "team_id",
+        allowNull: true,
       }),
       ...migrationDefaults(),
     }, {

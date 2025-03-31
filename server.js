@@ -1,7 +1,7 @@
 const http = require("http");
 const app = require("./index");
 // const socketIo = require("./socket.io");
-const port = process.env.PORT || 5007;
+const port = process.env.PORT || 5010;
 const httpServer = http.createServer(app);
 // socketIo(httpServer);
 

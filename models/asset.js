@@ -11,22 +11,6 @@ module.exports = (sequelize) => {
         constraints: false,
         as: 'user',
       });
-
-      // Item
-      Asset.belongsTo(models.Item, {
-        foreignKey: 'owner_id',
-        targetKey: 'item_id',
-        constraints: false,
-        as: 'item',
-      });
-
-      // Category
-      Asset.belongsTo(models.Category, {
-        foreignKey: 'owner_id',
-        targetKey: 'category_id',
-        constraints: false,
-        as: 'category',
-      });
     }
   }
   Asset.init({

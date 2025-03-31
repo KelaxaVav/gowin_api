@@ -4,10 +4,10 @@ const { defaultKeys, modelDefaults } = require('../sequelize/defaults');
 module.exports = (sequelize) => {
   class Designation extends Model {
     static associate(models) {
-    
+
       Designation.hasMany(models.Staff, {
-        foreignKey: 'staff_id',
-        targetKey: 'staff_id',
+        foreignKey: 'designation_id',
+        targetKey: 'designation_id',
         as: 'staffs',
       });
     }

@@ -3,19 +3,18 @@ const { PROD_DB_USERNAME, PROD_DB_PASSWORD, PROD_DB_NAME, PROD_DB_HOSTNAME } = p
 
 module.exports = {
   development: {
-    username: PROD_DB_USERNAME,
-    password: PROD_DB_PASSWORD,
-    database: `${PROD_DB_NAME}_dev`,
-    host: PROD_DB_HOSTNAME,
+    username: "kelaxa",
+    password: "kelaxa@123",
+    database: "team_gowin",
+    host: "192.168.1.33",
     dialect: "mysql"
   },
   local: {
-    username: "kelaxa",
-    password: "kelaxa@123",
-    database: "gowin",
-    host: "192.168.1.33",
+    username: "root",
+    password: "123",
+    database: "team_gowin",
+    host: "localhost",
     dialect: "mysql"
-    
   },
   production: {
     username: PROD_DB_USERNAME,

@@ -12,27 +12,29 @@ const permissionController = require("../controllers/permission");
 const authController = require("../controllers/auth");
 const userController = require("../controllers/user");
 const assetController = require("../controllers/asset");
-const translationController = require("../controllers/translation");
 const settingController = require("../controllers/setting");
-const notificationController = require("../controllers/notification");
-const deviceController = require("../controllers/device");
 const templateController = require("../controllers/template");
 const branchController = require("../controllers/branch");
-const vendorController = require("../controllers/vendor");
-const categoryController = require("../controllers/category");
-const itemController = require("../controllers/item");
-const invoiceController = require("../controllers/invoice");
-const transactionController = require("../controllers/transaction");
-const kitchenOrderController = require("../controllers/kitchenOrder");
-const transferController = require("../controllers/transfer");
-const holidayController = require("../controllers/holiday");
-const leaveRequestController = require("../controllers/leaveRequest");
-const attendanceController = require("../controllers/attendance");
-const salaryController = require("../controllers/salary");
-const batchController = require("../controllers/batch");
-const customerController = require("../controllers/customer");
-const positionController = require("../controllers/position");
 // const expenseController = require("../controllers/expense");
+
+const typesController = require("../controllers/types");
+const teamsController = require("../controllers/team");
+const regionsController = require("../controllers/region");
+const statesController = require("../controllers/state");
+const designationController = require("../controllers/designation");
+const insurerController = require("../controllers/insurer");
+const cityController = require("../controllers/city");
+const makeController = require("../controllers/make");
+const bankController = require("../controllers/bank");
+const bankAccountController = require("../controllers/bankAccount");
+const bankAccountTypesController = require("../controllers/bankAccountType");
+const partnerTypeController = require("../controllers/partnerType");
+const partnerController = require("../controllers/partner");
+const expensesController = require("../controllers/expenses");
+const expensesCategoryController = require("../controllers/expensesCategory");
+const expensesEntryController = require("../controllers/expensesEntry");
+const staffController = require("../controllers/staff");
+
 
 // Role
 router.route("/role")
@@ -59,8 +61,6 @@ router.route("/auth/profile")
   .put(upload.single('image'), imageToServer, userController.updateProfile);
 router.route("/auth/password")
   .put(userController.changePassword);
-router.route("/auth/notification")
-  .get(notificationController.getAll);
 
 // User
 router.route("/user")
@@ -71,26 +71,21 @@ router.route("/user/:user_id")
   .put(userController.updateById)
   .delete(userController.deleteById);
 
+// Staff
+router.route("/staff")
+  .post(staffController.create)
+  .get(staffController.getAll);
+router.route("/staff/:staff_id")
+  .get(staffController.getById)
+  .put(staffController.updateById)
+  .delete(staffController.deleteById);
+
 // Asset
 router.route("/asset")
   .post(upload.single('file'),
     imageToServer,
     assetController.create)
   .get(assetController.getAll);
-
-// Device
-router.route("/device")
-  .post(deviceController.create);
-
-// Translation
-router.route("/translation")
-  .post(translationController.update)
-  .get(translationController.getAll);
-router.route("/translation/data")
-  .get(translationController.getAllData);
-router.route("/translation/:translation_id")
-  .put(translationController.updateById)
-  .delete(translationController.deleteById);
 
 // Setting
 router.route("/setting")
@@ -131,166 +126,159 @@ router.route("/auth/branch")
 router.route("/auth/branch/settings")
   .put(branchController.updateSettingsByAuth);
 
-// Vendor
-router.route("/vendor")
-  .post(vendorController.create)
-  .get(vendorController.getAll);
-router.route("/vendor/:vendor_id")
-  .get(vendorController.getById)
-  .put(vendorController.updateById)
-  .delete(vendorController.deleteById);
+// Region  
+router.route("/general/types")
+  .post(typesController.create)
+router.route("/general/types/:type")
+  .get(typesController.getAll);
+router.route("/general/types/:type_id")
+  .put(typesController.updateById)
+  .delete(typesController.deleteById);
+router.route("/general/types/single/:type_id")
+  .get(typesController.getById)
 
-// Category
-router.route("/category")
-  .post(upload.single('image'), imageToServer, categoryController.create)
-  .get(categoryController.getAll);
-router.route("/category/:category_id")
-  .get(categoryController.getById)
-  .put(upload.single('image'), imageToServer, categoryController.updateById)
-  .delete(categoryController.deleteById);
-router.route("/option-category")
-  .get(categoryController.getAllOptions);
-router.route("/main-category")
-  .get(categoryController.getAllMainCategories)
-router.route("/main-category/:name")
-  .get(categoryController.getMainCategoryByName);
+// Team
+router.route("/general/teams")
+  .post(teamsController.create)
+  .get(teamsController.getAll);
+router.route("/general/teams/:team_id")
+  .put(teamsController.updateById)
+  .delete(teamsController.deleteById);
+router.route("/general/teams/single/:team_id")
+  .get(teamsController.getById)
 
-router.route("/category/:category_id/children")
-  .post(categoryController.appendChildOption)
-  .delete(categoryController.removeChildOption);
+// Region
+router.route("/general/regions")
+  .post(regionsController.create)
+  .get(regionsController.getAll);
+router.route("/general/regions/:region_id")
+  .put(regionsController.updateById)
+  .delete(regionsController.deleteById);
+router.route("/general/regions/single/:region_id")
+  .get(regionsController.getById)
 
-// CustomItem
-router.route("/item/custom")
-  .get(itemController.getAllCustomItems);
+// State
+router.route("/general/state")
+  .post(statesController.create)
+  .get(statesController.getAll);
+router.route("/general/state/:state_id")
+  .put(statesController.updateById)
+  .delete(statesController.deleteById);
+router.route("/general/state/single/:state_id")
+  .get(statesController.getById)
 
-// Item  
-router.route("/item")
-  .post(upload.single('image'), imageToServer, itemController.create)
-  .get(itemController.getAll);
-router.route("/item/:item_id")
-  .get(itemController.getById)
-  .put(upload.single('image'), imageToServer, itemController.updateById)
-  .delete(itemController.deleteById);
+// Designation
+router.route("/general/designation")
+  .post(designationController.create)
+  .get(designationController.getAll);
+router.route("/general/designation/:designation_id")
+  .put(designationController.updateById)
+  .delete(designationController.deleteById);
+router.route("/general/designation/single/:designation_id")
+  .get(designationController.getById)
 
-// Batch  
-router.route("/batch")
-  .post(batchController.create)
-  .get(batchController.getAll);
-router.route("/batch/:batch_id")
-  .get(batchController.getById)
-  .put(batchController.updateById)
-  .delete(batchController.deleteById);
+// Designation
+router.route("/general/insurer")
+  .post(insurerController.create)
+  .get(insurerController.getAll);
+router.route("/general/insurer/:insurer_id")
+  .put(insurerController.updateById)
+  .delete(insurerController.deleteById);
+router.route("/general/insurer/single/:insurer_id")
+  .get(insurerController.getById)
 
-// Customer  
-router.route("/customer")
-  .get(customerController.getAll);
-router.route("/customer/:customer_id")
-  .get(customerController.getById);
+// City
+router.route("/general/city")
+  .post(cityController.create)
+  .get(cityController.getAll);
+router.route("/general/city/:city_id")
+  .put(cityController.updateById)
+  .delete(cityController.deleteById);
+router.route("/general/city/single/:city_id")
+  .get(cityController.getById)
 
-// Invoice
-router.route("/invoice")
-  .post(invoiceController.create)
-  .get(invoiceController.getAll);
-router.route("/invoice/item")
-  .get(itemController.getAllItemsForInvoice);
-router.route("/invoice/:invoice_id")
-  .get(invoiceController.getById)
-  .put(invoiceController.updateById)
-  .delete(invoiceController.deleteById);
-router.route("/invoice/:invoice_id/status/:status")
-  .put(invoiceController.updateStatus);
-router.route("/invoice/:invoice_id/return")
-  .post(invoiceController.returnInvoice);
-router.route("/invoice/:invoice_id/transaction")
-  .post(transactionController.payInvoice);
+// Make
+router.route("/general/make")
+  .post(makeController.create)
+  .get(makeController.getAll);
+router.route("/general/make/:make_id")
+  .put(makeController.updateById)
+  .delete(makeController.deleteById);
+router.route("/general/make/single/:make_id")
+  .get(makeController.getById)
 
-// Transfer
-router.route("/transfer")
-  .post(transferController.create)
-  .get(transferController.getAll);
-router.route("/transfer/:transfer_id")
-  .get(transferController.getById)
-  .put(transferController.updateById)
-  .delete(transferController.deleteById);
-router.route("/transfer/:transfer_id/status/:status")
-  .put(transferController.updateStatus);
+// Bank
+router.route("/general/bank")
+  .post(bankController.create)
+  .get(bankController.getAll);
+router.route("/general/bank/:bank_id")
+  .put(bankController.updateById)
+  .delete(bankController.deleteById);
+router.route("/general/bank/single/:bank_id")
+  .get(bankController.getById)
 
-// Transaction
-router.route("/transaction")
-  .get(transactionController.getAll);
-router.route("/transaction/:transaction_id")
-  .get(transactionController.getById)
-  .put(transactionController.updateById)
-  .delete(transactionController.deleteById);
+// BankAccount
+router.route("/general/bank/account")
+  .post(bankAccountController.create)
+  .get(bankAccountController.getAll);
+router.route("/general/bank/account/:account_id")
+  .put(bankAccountController.updateById)
+  .delete(bankAccountController.deleteById);
+router.route("/general/bank/account/single/:account_id")
+  .get(bankAccountController.getById)
 
-// KitchenOrder
-router.route("/kitchen/order")
-  .post(kitchenOrderController.create)
-  .get(kitchenOrderController.getAll);
-router.route("/kitchen/order/:kitchen_order_id")
-  .get(kitchenOrderController.getById)
-  .put(kitchenOrderController.updateById)
-router.route("/kitchen/orders-kanban")
-  .get(kitchenOrderController.getAllAsStatusCategorized);
-router.route("/kitchen/order/:kitchen_order_id/status/:status")
-  .put(kitchenOrderController.updateStatus)
+// Bank Account Type
+router.route("/general/bank/account/type")
+  .post(bankAccountTypesController.create)
+  .get(bankAccountTypesController.getAll);
+router.route("/general/bank/account/type/:bank_account_type_id")
+  .put(bankAccountTypesController.updateById)
+  .delete(bankAccountTypesController.deleteById);
+router.route("/general/bank/account/type/single/:bank_account_type_id")
+  .get(bankAccountTypesController.getById)
 
-// Holiday  
-router.route("/holiday")
-  .post(holidayController.create)
-  .get(holidayController.getAll);
-router.route("/holiday/:holiday_id")
-  .get(holidayController.getById)
-  .put(holidayController.updateById)
-  .delete(holidayController.deleteById);
+// Partner Type
+router.route("/general/partner/type/data")
+  .get(partnerController.getCreatePartnerTypeData)
 
-// LeaveRequest  
-router.route("/leave/request")
-  .post(leaveRequestController.create)
-  .get(leaveRequestController.getAll);
-router.route("/leave/request/:leave_request_id")
-  .get(leaveRequestController.getById)
-  .put(leaveRequestController.updateById)
-  .delete(leaveRequestController.deleteById);
-router.route("/leave/request/:leave_request_id/status/:status")
-  .put(leaveRequestController.updateStatus);
+// Partner Type
+router.route("/general/partner/type")
+  .post(partnerTypeController.create)
+  .get(partnerTypeController.getAll);
+router.route("/general/partner/type/:partner_type_id")
+  .put(partnerTypeController.updateById)
+  .delete(partnerTypeController.deleteById);
+router.route("/general/partner/type/single/:partner_type_id")
+  .get(partnerTypeController.getById)
 
-// Attendance  
-router.route("/attendance")
-  .post(attendanceController.create)
-  .get(attendanceController.getAll);
-router.route("/attendance/:attendance_id")
-  .get(attendanceController.getById)
-  .put(attendanceController.updateById)
-  .delete(attendanceController.deleteById);
+// Expenses
+router.route("/expenses")
+  .post(expensesController.create)
+  .get(expensesController.getAll);
+router.route("/expenses/:expenses_id")
+  .put(expensesController.updateById)
+  .delete(expensesController.deleteById);
+router.route("/expenses/single/:expenses_id")
+  .get(expensesController.getById)
 
-// Salary  
-router.route("/salary")
-  .post(salaryController.create)
-  .get(salaryController.getAll);
-router.route("/salary/:salary_id")
-  .get(salaryController.getById)
-  .put(salaryController.updateById)
-  .delete(salaryController.deleteById);
+// Expenses Category
+router.route("/expenses/category")
+  .post(expensesCategoryController.create)
+  .get(expensesCategoryController.getAll);
+router.route("/expenses/category/:expenses_category_id")
+  .put(expensesCategoryController.updateById)
+  .delete(expensesCategoryController.deleteById);
+router.route("/expenses/category/single/:expenses_category_id")
+  .get(expensesCategoryController.getById)
 
-// Expense  
-// router.route("/expense")
-//   .post(expenseController.create)
-//   .get(expenseController.getAll);
-// router.route("/expense/:expense_id")
-//   .get(expenseController.getById)
-//   .put(expenseController.updateById)
-//   .delete(expenseController.deleteById);
-// router.route("/expense/:expense_id/transaction")
-//   .post(transactionController.payExpense);
-
-// Position  
-router.route("/position")
-  .post(positionController.create)
-  .get(positionController.getAll);
-router.route("/position/:position_id")
-  .get(positionController.getById)
-  .put(positionController.updateById)
-  .delete(positionController.deleteById);
+// Expenses Entry
+router.route("/expenses/entry")
+  .post(expensesEntryController.create)
+  .get(expensesEntryController.getAll);
+router.route("/expenses/entry/:expenses_entry_id")
+  .put(expensesEntryController.updateById)
+  .delete(expensesEntryController.deleteById);
+router.route("/expenses/entry/single/:expenses_entry_id")
+  .get(expensesEntryController.getById)
 
 module.exports = router;

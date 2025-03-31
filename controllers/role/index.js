@@ -20,8 +20,7 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
-	const { branch_id } = req.branch;
-	const whereOption = whereSearchAndFilter(Role, req.query, { defaultFilterObject: { branch_id } });
+	const whereOption = whereSearchAndFilter(Role, req.query);
 
 	const roles = await Role.findAll({
 		...req.paginate,

@@ -5,20 +5,18 @@ const { GENERAL_TYPES } = require('../data/constants');
 module.exports = (sequelize) => {
   class City extends Model {
     static associate(models) {
-    // LeaveRequest
-    City.belongsTo(models.State, {
-      foreignKey: 'state_id',
-      targetKey: 'state_id',
-      as: 'state',
-    });
+      // LeaveRequest
+      City.belongsTo(models.State, {
+        foreignKey: 'state_id',
+        targetKey: 'state_id',
+        as: 'state',
+      });
 
-    City.hasMany(models.Staff, {
-      foreignKey: 'staff_id',
-      targetKey: 'staff_id',
-      as: 'staffs',
-    });
-
-
+      City.hasMany(models.Staff, {
+        foreignKey: 'city_id',
+        targetKey: 'city_id',
+        as: 'staffs',
+      });
     }
   }
   City.init({

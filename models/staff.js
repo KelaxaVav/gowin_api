@@ -4,7 +4,7 @@ const { defaultKeys, modelDefaults } = require('../sequelize/defaults');
 module.exports = (sequelize) => {
   class Staff extends Model {
     static associate(models) {
-    
+
       Staff.belongsTo(models.Branch, {
         targetKey: 'branch_id',
         foreignKey: 'branch_id',
@@ -17,11 +17,29 @@ module.exports = (sequelize) => {
         as: 'designation',
       });
 
-      Staff.belongsTo(models.City,{
+      Staff.belongsTo(models.Role, {
+        targetKey: 'role_id',
+        foreignKey: 'role_id',
+        as: 'role',
+      });
+
+      Staff.belongsTo(models.Team, {
+        targetKey: 'team_id',
+        foreignKey: 'team_id',
+        as: 'team',
+      });
+
+      Staff.belongsTo(models.City, {
         targetKey: 'city_id',
         foreignKey: 'city_id',
         as: 'city',
-      })
+      });
+
+      Staff.hasMany(models.Partner, {
+        sourceKey: 'staff_id',
+        foreignKey: 'staff_id',
+        as: 'partners',
+      });
     }
   }
   Staff.init({
@@ -54,14 +72,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password_hash: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    // username: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    // },
+    // password_hash: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    // },
     pin_code: {
       type: DataTypes.STRING,
       allowNull: false,

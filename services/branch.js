@@ -1,8 +1,9 @@
 const { Op } = require("sequelize");
 const { v4 } = require("uuid");
-const { Branch, Category, Role, Position, Customer, User } = require("../models");
+const { Branch, Category, Role, Position, Customer, User, Staff } = require("../models");
 const { Validation, findModelAndThrow, findModelOrThrow } = require("../utils/validation");
 const UserService = require("./user");
+const StaffService = require("./staff");
 
 class BranchService {
     /**
@@ -10,25 +11,21 @@ class BranchService {
      * @param {{
      * branch_id?:string
      * name:string
-     * code:string
-     * contact:string[]
-     * address:string
-     * settings:TBranchSetting
+     * region_id:string
+     * designation_id?:string
+     * city_id?:string
      * }} param0 
      * @param {Extras} extras 
      */
-    static async createBranch({ name, contact, address, code, settings, branch_id }, extras) {
+    static async createBranch({ name, branch_id, region_id, designation_id, city_id }, extras) {
         Validation.nullParameters([
             name,
-            code,
-            contact,
-            address,
+            region_id,
         ]);
 
         await findModelAndThrow({
             [Op.or]: [
                 { name },
-                { code },
             ],
         }, Branch);
 
@@ -39,72 +36,38 @@ class BranchService {
         const branch = await Branch.create({
             branch_id,
             name,
-            code,
-            contact,
-            address,
-            mainCategories: [
-                {
-                    name: 'POS_MENU',
-                    options: [
-                        { name: 'Custom Cake', branch_id, children: [] }
-                    ],
-                },
-                { name: 'UNCATEGORIZED' },
-                { name: 'CUSTOM_PRESET' },
+            region_id,
+            roles: [
+                { name: 'BRANCH_ADMIN' },
+                { name: 'BRANCH_MANAGER' },
             ],
-            roles: [{ name: 'Branch Admin' }],
-            positions: [{ name: 'Branch Manager' }],
-            customers: [{ name: "Walk In", mobile: contact[0] }],
-            settings: {
-                reward: {
-                    status: settings?.reward?.status ?? false,
-                    value: settings?.reward?.value ?? 0,
-                },
-            },
         }, {
             include: [
                 {
-                    model: Customer,
-                    as: 'customers',
-                },
-                {
-                    model: Category,
-                    as: 'mainCategories',
-                    include: [
-                        {
-                            model: Category,
-                            as: 'options',
-                        },
-                    ],
-                },
-                {
                     model: Role,
                     as: 'roles',
-                    include: [
-                        {
-                            model: User,
-                            as: 'users',
-                        }
-                    ],
-                },
-                {
-                    model: Position,
-                    as: 'positions',
                 },
             ],
             transaction: extras.transaction,
         });
 
-        await UserService.createUser({
+        await StaffService.createStaff({
             branch_id: branch.branch_id,
             name: "Branch Admin",
             email: `admin.${name}@gmail.com`.toLowerCase(),
-            nic: branch.code,
-            mobile: contact[0],
+            mobile_no: name.toLowerCase(),
             password: '12345678',
             confirm_password: '12345678',
             role_id: branch.roles[0].role_id,
-            position_id: branch.positions[0].position_id,
+
+            dob: new Date(),
+            blood_group: '',
+            door_no: '',
+            street: '',
+            pin_code: '',
+            is_active: true,
+            designation_id,
+            city_id,
         }, extras);
 
         return branch;
@@ -113,21 +76,15 @@ class BranchService {
     /**
      * Update branch
      * @param {{
-    * branch_id:string
-    * code:string
-    * name:string
-    * contact:string[]
-    * address:string
-    * settings:TBranchSetting
-    * }} param0 
-    * @param {Extras} extras 
-    */
-    static async updateBranch({ branch_id, name, contact, address, code, settings }, extras) {
+     * branch_id:string
+     * name:string
+     * region_id:string
+     * }} param0 
+     * @param {Extras} extras 
+     */
+    static async updateBranch({ branch_id, name, region_id }, extras) {
         Validation.nullParameters([
             name,
-            code,
-            contact,
-            address,
         ]);
 
         const branch = await findModelOrThrow({ branch_id }, Branch);
@@ -136,18 +93,13 @@ class BranchService {
             branch_id: { [Op.not]: branch_id },
             [Op.or]: [
                 { name },
-                { code },
             ],
         }, Branch);
 
         await branch.update({
             name,
-            code,
-            contact,
-            address,
+            region_id,
         }, { transaction: extras.transaction });
-
-        settings && await this.updateBranchSettings({ branch_id, settings }, extras);
 
         return branch;
     }

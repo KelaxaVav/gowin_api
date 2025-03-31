@@ -3,27 +3,24 @@ const { defaultKeys, migrationDefaults, relationShip } = require('../sequelize/d
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('devices', {
-      ...defaultKeys("device_id"),
-      fcm_token: {
+    await queryInterface.createTable('branches', {
+      ...defaultKeys("branch_id"),
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
       },
-      platform: {
-        type: Sequelize.ENUM(["ANDROID", "IOS", "WEB"]),
+      region_id: relationShip({
+        modelName: "regions",
+        key: "region_id",
         allowNull: false,
-      },
-      user_id: relationShip({
-        modelName: "users",
-        key: "user_id",
       }),
-      ...migrationDefaults({ paranoid: false }),
+      ...migrationDefaults(),
     }, {
       collate: process.env.COLLATE,
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('devices');
+    await queryInterface.dropTable('branches');
   }
 };

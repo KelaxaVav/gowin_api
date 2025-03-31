@@ -7,8 +7,8 @@ module.exports = (sequelize) => {
     static associate(models) {
 
       State.hasMany(models.City, {
-        foreignKey: 'city_id',
-        targetKey: 'city_id',
+        foreignKey: 'state_id',
+        targetKey: 'state_id',
         as: 'cities',
       });
     }

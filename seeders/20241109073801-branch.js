@@ -5,6 +5,8 @@ const BranchService = require('../services/branch');
 module.exports = {
   async up(queryInterface, Sequelize) {
     try {
+      return
+
       const data = require('./data/branches.json');
 
       // 
