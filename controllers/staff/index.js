@@ -13,7 +13,7 @@ const create = routeHandler(async (req, res, extras) => {
 		mobile_no,
 		password,
 		confirm_password,
-		role_id,
+		role,
 		blood_group,
 		city_id,
 		designation_id,
@@ -33,7 +33,7 @@ const create = routeHandler(async (req, res, extras) => {
 		mobile_no,
 		password,
 		confirm_password,
-		role_id,
+		role,
 		blood_group,
 		city_id,
 		designation_id,
@@ -57,16 +57,13 @@ const getAll = routeHandler(async (req, res, extras) => {
 	const staffs = await Staff.findAll({
 		include: [
 			{
-				model: Role,
-				as: 'role',
-				// where: {
-				// 	branch_id,
-				// },
-			},
-			{
 				model: Designation,
 				as: 'designation',
-			}
+			},
+			{
+				model: Branch,
+				as: 'branch',
+			},
 		],
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -84,12 +81,6 @@ const getById = routeHandler(async (req, res, extras) => {
 	const { staff_id } = req.params;
 
 	const staff = await findModelOrThrow({ staff_id }, Staff, {
-		include: [
-			{
-				model: Role,
-				as: 'role',
-			},
-		],
 		throwOnDeleted: true,
 	});
 
@@ -102,40 +93,12 @@ const getProfile = routeHandler(async (req, res, extras) => {
 	const staff = await findModelOrThrow({ staff_id }, Staff, {
 		include: [
 			{
-				model: Role,
-				as: 'role',
-				include: [
-					{
-						model: Branch,
-						as: 'branch',
-						include: [
-							{
-								model: Category,
-								as: 'mainCategories',
-							},
-						],
-					},
-					{
-						model: Permission,
-						as: 'permissions',
-					},
-				],
+				model: Branch,
+				as: 'branch',
 			},
 		],
 		throwOnDeleted: true,
 	});
-
-	staff.role.branch.dataValues.mainCategories = staff.role.branch.mainCategories.reduce((data, category) => {
-		data[category.name] = category;
-		return data;
-	}, {});
-
-	staff.dataValues.permissions = staff.role.permissions.reduce((data, permission) => {
-		data.push(permission.name);
-		return data;
-	}, []);
-
-	delete staff.role.dataValues.permissions;
 
 	return res.sendRes(staff, { message: 'Staff profile loaded successfully', status: STATUS_CODE.OK });
 }, false);
@@ -164,7 +127,7 @@ const updateById = routeHandler(async (req, res, extras) => {
 	const { staff_id } = req.params;
 
 	const { blood_group, city_id, confirm_password, designation_id, dob, door_no, email,
-		is_active, mobile_no, name, password, pin_code, role_id, street, team_id } = req.body;
+		is_active, mobile_no, name, password, pin_code, role, street, team_id } = req.body;
 
 	const staff = await StaffService.updateStaff({
 		staff_id,
@@ -180,7 +143,7 @@ const updateById = routeHandler(async (req, res, extras) => {
 		name,
 		password,
 		pin_code,
-		role_id,
+		role,
 		street,
 		team_id,
 	}, extras);

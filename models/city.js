@@ -17,6 +17,12 @@ module.exports = (sequelize) => {
         targetKey: 'city_id',
         as: 'staffs',
       });
+
+      City.hasMany(models.Partner, {
+        foreignKey: 'city_id',
+        targetKey: 'city_id',
+        as: 'partners',
+      });
     }
   }
   City.init({

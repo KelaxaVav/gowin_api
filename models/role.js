@@ -28,12 +28,12 @@ module.exports = (sequelize) => {
         as: 'rolePermissions',
       });
 
-      // Staff
-      Role.hasMany(models.Staff, {
-        foreignKey: 'role_id',
-        sourceKey: 'role_id',
-        as: 'staffs',
-      });
+      // // Staff
+      // Role.hasMany(models.Staff, {
+      //   foreignKey: 'role_id',
+      //   sourceKey: 'role_id',
+      //   as: 'staffs',
+      // });
     }
   }
   Role.init({

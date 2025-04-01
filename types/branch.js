@@ -7,18 +7,9 @@
  * @property {string[]} contact
  * @property {string} address
  * @property {TBranchSetting} settings
- * @property {{[key:string]:TCategory}} mainCategories
  */
 
 /**
  * 
  * @typedef {Object} TBranchSetting
- * @property {TRewardSetting} reward
- */
-
-/**
- * 
- * @typedef {Object} TRewardSetting
- * @property {boolean} status
- * @property {number} value
  */

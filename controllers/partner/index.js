@@ -1,77 +1,111 @@
-const { PartnerType, State, City, PinCode } = require("../../models");
+const { Partner, State, City, PinCode, Staff, Team } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
-const PartnerTypeService = require("../../services/partnerType");
+const PartnerService = require("../../services/partner");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { name, is_active } = req.body;
+	const { name, branch_id, city_id, confirm_password, door_no, email, mobile_no,
+		partner_type_id, password, pin_code, staff_id, street, is_active } = req.body;
 
-	const partnerTypes = await PartnerTypeService.createType({
+	const partners = await PartnerService.createPartner({
 		name,
+		branch_id,
+		city_id,
+		confirm_password,
+		door_no,
+		email,
+		mobile_no,
+		partner_type_id,
+		password,
+		pin_code,
+		staff_id,
+		street,
 		is_active,
 	}, extras);
 
 	await extras.transaction.commit();
-	return res.sendRes(partnerTypes, { message: 'Partner Type created successfully', status: STATUS_CODE.OK });
+	return res.sendRes(partners, { message: 'Partner created successfully', status: STATUS_CODE.OK });
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
-	const partnerTypes = await PartnerType.findAll({
+	const partners = await Partner.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']]
 	});
 
-	return res.sendRes(partnerTypes, {
-		message: 'Partner Types loaded successfully',
-		total: await PartnerType.count(),
+	return res.sendRes(partners, {
+		message: 'Partner loaded successfully',
+		total: await Partner.count(),
 	});
 }, false);
 
 const getById = routeHandler(async (req, res, extras) => {
-	const { partner_type_id } = req.params;
+	const { partner_id } = req.params;
 
-	// /** @type {TTransfer} */
-	const team = await findModelOrThrow({ partner_type_id }, PartnerType);
+	const team = await findModelOrThrow({ partner_id }, Partner, {
+		include: [
+			{
+				model: Staff,
+				as: 'staff',
+				include: [
+					{
+						model: Team,
+						as: 'team',
+					}
+				],
+			}
+		],
+	});
 
-
-	return res.sendRes(team, { message: 'Partner Type loaded successfully', status: STATUS_CODE.OK });
+	return res.sendRes(team, { message: 'Partner loaded successfully', status: STATUS_CODE.OK });
 }, false);
 
 const updateById = routeHandler(async (req, res, extras) => {
-	const { partner_type_id } = req.params;
-	const { name, is_active } = req.body;
+	const { partner_id } = req.params;
+	const { name, branch_id, city_id, confirm_password, door_no, email, mobile_no,
+		partner_type_id, password, pin_code, staff_id, street, is_active } = req.body;
 
-	const partnerTypes = await PartnerTypeService.updateTypes({
-		partner_type_id,
+	const partners = await PartnerService.updatePartner({
+		partner_id,
 		name,
+		branch_id,
+		city_id,
+		confirm_password,
+		door_no,
+		email,
+		mobile_no,
+		partner_type_id,
+		password,
+		pin_code,
+		staff_id,
+		street,
 		is_active,
 	}, extras);
 
 	await extras.transaction.commit();
-	return res.sendRes(partnerTypes, { message: 'Partner Type updated successfully', status: STATUS_CODE.OK });
+	return res.sendRes(partners, { message: 'Partner updated successfully', status: STATUS_CODE.OK });
 });
 
 
 const deleteById = routeHandler(async (req, res, extras) => {
 	const { partner_type_id } = req.params;
 
-	await PartnerTypeService.deleteType({ partner_type_id }, extras);
+	await PartnerService.deleteType({ partner_type_id }, extras);
 
 	await extras.transaction.commit();
-	return res.sendRes(null, { message: 'Partner Type deleted successfully', status: STATUS_CODE.OK });
+	return res.sendRes(null, { message: 'Partner deleted successfully', status: STATUS_CODE.OK });
 });
-
 
 const getCreatePartnerTypeData = routeHandler(async (req, res, extras) => {
 	const state = await State.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
-		include:[
+		include: [
 			{
-				model:City,
-				as:'cities',
+				model: City,
+				as: 'cities',
 			}
 		]
 	});
@@ -81,14 +115,14 @@ const getCreatePartnerTypeData = routeHandler(async (req, res, extras) => {
 		order: [['created_at', 'DESC']],
 	});
 
-	const partnerTypeData ={
-		state:state,
-		pin_codes:pinCodes
+	const partnerData = {
+		state: state,
+		pin_codes: pinCodes
 	}
 
-	return res.sendRes(partnerTypeData, {
+	return res.sendRes(partnerData, {
 		message: 'Partner Data loaded successfully',
-		// total: await PartnerType.count(),
+		// total: await Partner.count(),
 	});
 }, false);
 

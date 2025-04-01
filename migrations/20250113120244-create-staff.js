@@ -1,4 +1,5 @@
 'use strict';
+const { ROLES } = require('../data/constants');
 const { defaultKeys, migrationDefaults, relationShip } = require('../sequelize/defaults');
 /** @type {import('sequelize-cli').Migration} */
 
@@ -43,10 +44,10 @@ module.exports = {
         defaultValue: true,
         allowNull: false,
       },
-      role_id: relationShip({
-        modelName: "roles",
-        key: "role_id",
-      }),
+      role: {
+        type: Sequelize.ENUM(Object.keys(ROLES)),
+        allowNull: false,
+      },
       branch_id: relationShip({
         modelName: "branches",
         key: "branch_id",
@@ -59,11 +60,6 @@ module.exports = {
       city_id: relationShip({
         modelName: "cities",
         key: "city_id",
-        allowNull: true,
-      }),
-      team_id: relationShip({
-        modelName: "teams",
-        key: "team_id",
         allowNull: true,
       }),
       ...migrationDefaults(),
