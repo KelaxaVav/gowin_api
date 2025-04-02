@@ -82,6 +82,15 @@ router.route("/staff/:staff_id")
   .put(staffController.updateById)
   .delete(staffController.deleteById);
 
+// Partner
+router.route("/partner")
+  .post(partnerController.create)
+  .get(partnerController.getAll);
+router.route("/partner/:partner_id")
+  .get(partnerController.getById)
+  .put(partnerController.updateById)
+  .delete(partnerController.deleteById);
+
 // Asset
 router.route("/asset")
   .post(upload.single('file'),
@@ -144,10 +153,15 @@ router.route("/general/teams")
   .post(teamsController.create)
   .get(teamsController.getAll);
 router.route("/general/teams/:team_id")
+  .get(teamsController.getById)
   .put(teamsController.updateById)
   .delete(teamsController.deleteById);
 router.route("/general/teams/single/:team_id")
   .get(teamsController.getById)
+router.route("/general/teams/:team_id/manager")
+  .put(teamsController.updateManagers)
+router.route("/general/teams/:team_id/partner")
+  .put(teamsController.updatePartners)
 
 // Region
 router.route("/general/regions")

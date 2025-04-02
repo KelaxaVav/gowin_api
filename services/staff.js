@@ -4,6 +4,7 @@ const { Validation, findModelOrThrow, findModelAndThrow } = require("../utils/va
 const AppError = require("../utils/appError");
 const { STATUS_CODE } = require("../utils/utility");
 const bcrypt = require('bcrypt');
+const { ROLES } = require("../data/constants");
 
 class StaffService {
     /**
@@ -78,7 +79,7 @@ class StaffService {
      * mobile_no:string
      * password:string
      * confirm_password:string
-     * role_id:string
+     * role:TRoleName
      * dob:string
      * blood_group:string
      * door_no:string
@@ -92,8 +93,8 @@ class StaffService {
      * @param {Extras} extras 
      * @returns 
      */
-    static async createStaff({ branch_id, name, email, mobile_no, password, confirm_password,
-        role_id, blood_group, city_id, designation_id, dob, door_no, is_active, pin_code, street, team_id }, extras) {
+    static async createStaff({ branch_id, name, email, mobile_no, password, confirm_password, role,
+        blood_group, city_id, designation_id, dob, door_no, is_active, pin_code, street, team_id }, extras) {
         Validation.nullParameters([
             name,
             branch_id,
@@ -102,12 +103,12 @@ class StaffService {
             mobile_no,
             password,
             confirm_password,
-            role_id,
+            role,
         ]);
 
         Validation.password(password, confirm_password);
+        Validation.isTrue(ROLES[role]);
 
-        await findModelOrThrow({ role_id, branch_id }, Role, { transaction: extras.transaction });
         designation_id && await findModelOrThrow({ designation_id }, Designation, { transaction: extras.transaction });
         city_id && await findModelOrThrow({ city_id }, City, { transaction: extras.transaction });
 
@@ -128,7 +129,7 @@ class StaffService {
             mobile_no,
             password,
             confirm_password,
-            role_id,
+            role,
             blood_group,
             designation_id,
             city_id,
@@ -153,7 +154,7 @@ class StaffService {
      * mobile_no:string
      * password:string
      * confirm_password:string
-     * role_id:string
+     * role:string
      * dob:string
      * blood_group:string
      * door_no:string
@@ -167,24 +168,16 @@ class StaffService {
      * @param {Extras} extras 
      */
     static async updateStaff({ staff_id, branch_id, blood_group, city_id, confirm_password, designation_id,
-        dob, door_no, email, is_active, mobile_no, name, password, pin_code, role_id, street, team_id }, extras) {
+        dob, door_no, email, is_active, mobile_no, name, password, pin_code, role, street, team_id }, extras) {
         const staff = await findModelOrThrow({ staff_id }, Staff, {
-            include: [
-                {
-                    model: Role,
-                    as: 'role',
-                },
-            ],
             throwOnDeleted: true,
         });
 
         branch_id = staff.branch_id;
 
         Validation.password(password, confirm_password);
+        role && Validation.isTrue(ROLES[role]);
 
-        if (role_id && role_id != staff.role_id) {
-            await findModelOrThrow({ role_id, branch_id }, Role);
-        }
         if (designation_id && designation_id != staff.designation_id) {
             await findModelOrThrow({ designation_id, branch_id }, Designation);
         }
@@ -222,7 +215,7 @@ class StaffService {
             is_active,
             pin_code,
             street,
-            role_id,
+            role,
             branch_id,
             designation_id,
             city_id,
@@ -230,70 +223,6 @@ class StaffService {
         }, { transaction: extras.transaction });
 
         await staff.reload({ transaction: extras.transaction });
-
-        return staff;
-    }
-
-    /**
-     * Update profile
-     * @param {{
-     * staff_id:string
-     * name:string
-     * email:string
-     * mobile:number
-     * }} param0 
-     * @param {Extras} extras 
-     */
-    static async updateProfile({ staff_id, name, email, mobile }, extras) {
-        const staff = await findModelOrThrow({ staff_id }, Staff);
-
-        Validation.emptyStringParameters([name, mobile, email]);
-
-        await findModelOrThrow({ role_id, branch_id }, Role, { transaction: extras.transaction });
-        designation_id && await findModelOrThrow({ designation_id }, Designation, { transaction: extras.transaction });
-        city_id && await findModelOrThrow({ city_id }, City, { transaction: extras.transaction });
-
-        const universalUniqueFields = { mobile, email };
-        await Promise.all(Object.keys(universalUniqueFields).map(async key => {
-            const value = universalUniqueFields[key];
-
-            if (value && value != staff[key]) {
-                await findModelAndThrow({
-                    [key]: value,
-                    staff_id: {
-                        [Op.not]: staff_id,
-                    },
-                }, Staff, {
-                    include: [
-                        {
-                            model: Role,
-                            as: 'role',
-                        },
-                    ],
-                    throwOnDeleted: true,
-                    messageOnDeleted: `Staff with this ${key} is deleted`,
-                    messageOnFound: `Staff with this ${key} is exist`,
-                });
-            }
-        }));
-
-        await staff.update({
-            name,
-            email,
-            mobile_no,
-            password,
-            confirm_password,
-            role_id,
-            blood_group,
-            designation_id,
-            city_id,
-            team_id,
-            dob: dob ? new Date(dob).toISOString().split('T')[0] : undefined,
-            door_no,
-            is_active,
-            pin_code,
-            street,
-        }, { transaction: extras.transaction });
 
         return staff;
     }

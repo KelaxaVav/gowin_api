@@ -4,6 +4,7 @@ const { Branch, Category, Role, Position, Customer, User, Staff } = require("../
 const { Validation, findModelAndThrow, findModelOrThrow } = require("../utils/validation");
 const UserService = require("./user");
 const StaffService = require("./staff");
+const { ROLES } = require("../data/constants");
 
 class BranchService {
     /**
@@ -37,17 +38,18 @@ class BranchService {
             branch_id,
             name,
             region_id,
-            roles: [
-                { name: 'BRANCH_ADMIN' },
-                { name: 'BRANCH_MANAGER' },
-            ],
+            // roles: [
+            //     { name: 'BRANCH_ADMIN' },
+            //     { name: 'BRANCH_MANAGER' },
+            //     { name: 'RELATIONSHIP_MANAGER' },
+            // ],
         }, {
-            include: [
-                {
-                    model: Role,
-                    as: 'roles',
-                },
-            ],
+            // include: [
+            //     {
+            //         model: Role,
+            //         as: 'roles',
+            //     },
+            // ],
             transaction: extras.transaction,
         });
 
@@ -58,7 +60,7 @@ class BranchService {
             mobile_no: name.toLowerCase(),
             password: '12345678',
             confirm_password: '12345678',
-            role_id: branch.roles[0].role_id,
+            role: ROLES.BRANCH_ADMIN,
 
             dob: new Date(),
             blood_group: '',

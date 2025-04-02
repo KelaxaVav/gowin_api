@@ -10,7 +10,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      branch: relationShip({
+      staff_id: relationShip({
+        modelName: "staffs",
+        key: "staff_id",
+        allowNull: true,
+      }),
+      branch_id: relationShip({
         modelName: "branches",
         key: "branch_id",
       }),
