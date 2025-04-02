@@ -35,6 +35,8 @@ const expensesCategoryController = require("../controllers/expensesCategory");
 const expensesEntryController = require("../controllers/expensesEntry");
 const staffController = require("../controllers/staff");
 
+const pdfController = require("../controllers/pdf");
+
 
 // Role
 router.route("/role")
@@ -280,5 +282,9 @@ router.route("/expenses/entry/:expenses_entry_id")
   .delete(expensesEntryController.deleteById);
 router.route("/expenses/entry/single/:expenses_entry_id")
   .get(expensesEntryController.getById)
+
+//PDF
+router.route("/pdf")
+  .post(upload.single('pdf'), pdfController.extractData)
 
 module.exports = router;
