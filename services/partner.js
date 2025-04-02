@@ -6,7 +6,6 @@ class PartnerService {
      * 
      * @param {{
      * partner_type_id:string
-     * branch_id:string    
      * name:string
      * email:string
      * mobile_no:string
@@ -22,11 +21,10 @@ class PartnerService {
      * @param {Extras} extras 
      * @returns 
      */
-    static async createPartner({ name, is_active, branch_id, city_id, confirm_password, door_no,
+    static async createPartner({ name, is_active, city_id, confirm_password, door_no,
         email, mobile_no, partner_type_id, password, pin_code, staff_id, street }, extras) {
         Validation.nullParameters([
             name,
-            branch_id,
             name,
             email,
             mobile_no,
@@ -38,7 +36,6 @@ class PartnerService {
 
         const partner = await Partner.create({
             partner_type_id,
-            branch_id,
             name,
             email,
             mobile_no,

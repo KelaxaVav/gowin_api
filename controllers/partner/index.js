@@ -32,7 +32,17 @@ const create = routeHandler(async (req, res, extras) => {
 const getAll = routeHandler(async (req, res, extras) => {
 	const partners = await Partner.findAll({
 		...req.paginate,
-		order: [['created_at', 'DESC']]
+		order: [['created_at', 'DESC']],
+		include: [
+			{
+				model: Staff,
+				as: 'staff',
+			},
+			{
+				model: City,
+				as: 'city',
+			},
+		],
 	});
 
 	return res.sendRes(partners, {
@@ -90,9 +100,9 @@ const updateById = routeHandler(async (req, res, extras) => {
 
 
 const deleteById = routeHandler(async (req, res, extras) => {
-	const { partner_type_id } = req.params;
+	const { partner_id } = req.params;
 
-	await PartnerService.deleteType({ partner_type_id }, extras);
+	await PartnerService.deletePartner({ partner_id }, extras);
 
 	await extras.transaction.commit();
 	return res.sendRes(null, { message: 'Partner deleted successfully', status: STATUS_CODE.OK });
