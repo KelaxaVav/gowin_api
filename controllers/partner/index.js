@@ -4,6 +4,7 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const PartnerService = require("../../services/partner");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { name, branch_id, city_id, confirm_password, door_no, email, mobile_no,
@@ -30,6 +31,8 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(Partner, req.query);
+
 	const partners = await Partner.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -43,6 +46,7 @@ const getAll = routeHandler(async (req, res, extras) => {
 				as: 'city',
 			},
 		],
+		where: whereOption,
 	});
 
 	return res.sendRes(partners, {
@@ -98,7 +102,6 @@ const updateById = routeHandler(async (req, res, extras) => {
 	return res.sendRes(partners, { message: 'Partner updated successfully', status: STATUS_CODE.OK });
 });
 
-
 const deleteById = routeHandler(async (req, res, extras) => {
 	const { partner_id } = req.params;
 
@@ -109,6 +112,8 @@ const deleteById = routeHandler(async (req, res, extras) => {
 });
 
 const getCreatePartnerTypeData = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(State, req.query);
+
 	const state = await State.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -117,7 +122,8 @@ const getCreatePartnerTypeData = routeHandler(async (req, res, extras) => {
 				model: City,
 				as: 'cities',
 			}
-		]
+		],
+		where: whereOption,
 	});
 
 	const pinCodes = await PinCode.findAll({

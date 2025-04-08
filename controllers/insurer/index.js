@@ -1,9 +1,10 @@
-const {  Insurer } = require("../../models");
+const { Insurer } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const InsurerService = require("../../services/insurer");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { name, is_active } = req.body;
@@ -18,9 +19,12 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(Insurer, req.query);
+
 	const states = await Insurer.findAll({
 		...req.paginate,
-		order: [['created_at', 'DESC']]
+		order: [['created_at', 'DESC']],
+		where: whereOption,
 	});
 
 	return res.sendRes(states, {

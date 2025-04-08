@@ -4,11 +4,12 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const BankAccountService = require("../../services/bankAccount");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { name, account_no, pan_no, ifsc_code, gst_no, aadhar_no, other_names, bank_id, bank_account_type_id, is_active } = req.body;
 
-	
+
 	const bankAccounts = await BankAccountService.createBankAccount({
 		name,
 		account_no,
@@ -27,6 +28,8 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(BankAccount, req.query);
+
 	const bankAccounts = await BankAccount.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -40,8 +43,8 @@ const getAll = routeHandler(async (req, res, extras) => {
 				as: 'bankAccountType'
 			}
 
-		]
-
+		],
+		where: whereOption,
 	});
 
 	return res.sendRes(bankAccounts, {

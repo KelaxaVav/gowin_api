@@ -4,6 +4,7 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const BankService = require("../../services/bank");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { bankNames, is_active } = req.body;
@@ -22,9 +23,12 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(Bank, req.query);
+
 	const banks = await Bank.findAll({
 		...req.paginate,
-		order: [['created_at', 'DESC']]
+		order: [['created_at', 'DESC']],
+		where: whereOption,
 	});
 
 	return res.sendRes(banks, {

@@ -4,6 +4,7 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const DesignationService = require("../../services/designation");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { name, is_active } = req.body;
@@ -18,9 +19,12 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(Designation, req.query);
+
 	const designations = await Designation.findAll({
 		...req.paginate,
-		order: [['created_at', 'DESC']]
+		order: [['created_at', 'DESC']],
+		where: whereOption,
 	});
 
 	return res.sendRes(designations, {

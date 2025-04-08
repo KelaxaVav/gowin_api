@@ -1,4 +1,4 @@
-const { Role, Branch, Category, Permission, Staff, Designation } = require("../../models");
+const { Role, Branch, Category, Permission, Staff, Designation, City, State } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
@@ -64,6 +64,16 @@ const getAll = routeHandler(async (req, res, extras) => {
 				model: Branch,
 				as: 'branch',
 			},
+			{
+				model: City,
+				as: 'city',
+				include: [
+					{
+						model: State,
+						as: 'state',
+					},
+				]
+			},
 		],
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -82,6 +92,18 @@ const getById = routeHandler(async (req, res, extras) => {
 
 	const staff = await findModelOrThrow({ staff_id }, Staff, {
 		throwOnDeleted: true,
+		include: [
+			{
+				model: City,
+				as: 'city',
+				include: [
+					{
+						model: State,
+						as: 'state',
+					},
+				]
+			},
+		]
 	});
 
 	return res.sendRes(staff, { message: 'Staff loaded successfully', status: STATUS_CODE.OK });
