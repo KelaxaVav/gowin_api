@@ -1,20 +1,23 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 const { defaultKeys, modelDefaults } = require('../sequelize/defaults');
-const { GENERAL_TYPES } = require('../data/constants');
 module.exports = (sequelize) => {
-  class State extends Model {
+  class RTO extends Model {
     static associate(models) {
-
-      State.hasMany(models.City, {
-        foreignKey: 'city_id',
-        targetKey: 'city_id',
-        as: 'cities',
+      RTO.belongsTo(models.State, {
+        foreignKey: 'state_id',
+        targetKey: 'state_id',
+        as: 'state',
+      });
+      RTO.belongsTo(models.RTOCategory, {
+        foreignKey: 'rto_category_id',
+        targetKey: 'rto_category_id',
+        as: 'rto_category',
       });
     }
   }
-  State.init({
-    ...defaultKeys("state_id"),
+  RTO.init({
+    ...defaultKeys("rto_id"),
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,8 +27,8 @@ module.exports = (sequelize) => {
       defaultValue: true,
       allowNull: false,
     },
-  }, modelDefaults(sequelize, 'states'));
+  }, modelDefaults(sequelize, 'rto'));
 
 
-  return State;
+  return RTO;
 };

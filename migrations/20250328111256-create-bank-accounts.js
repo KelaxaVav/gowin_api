@@ -1,4 +1,5 @@
 'use strict';
+const { ACC_HOLDER_TYPES } = require('../data/constants');
 const { defaultKeys, migrationDefaults, relationShip } = require('../sequelize/defaults');
 /** @type {import('sequelize-cli').Migration} */
 
@@ -6,7 +7,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('bank_accounts', {
       ...defaultKeys("bank_account_id"),
-      name: {
+      acc_name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -30,15 +31,32 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      other_names: {
+      others: {
         type: Sequelize.STRING,
+        allowNull: true,
+      },
+      mobile: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      mail: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      tan_no: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+     
+      user_type: {
+        type: Sequelize.ENUM(Object.keys(ACC_HOLDER_TYPES)),
         allowNull: false,
       },
-      is_active: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-        allowNull: false,
-      },
+      loginId_id: relationShip({
+        modelName: "login_id",
+        key: "loginId_id",
+        allowNull: true,
+      }),
       bank_id:relationShip({
         modelName: "banks",
         key: "bank_id",
@@ -47,6 +65,11 @@ module.exports = {
         modelName: "bank_account_types",
         key: "bank_account_type_id",
       }),
+      is_active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false,
+      },
       ...migrationDefaults(),
     }, {
       collate: process.env.COLLATE,

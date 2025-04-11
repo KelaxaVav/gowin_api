@@ -7,24 +7,28 @@ const BankAccountService = require("../../services/bankAccount");
 const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { name, account_no, pan_no, ifsc_code, gst_no, aadhar_no, other_names, bank_id, bank_account_type_id, is_active } = req.body;
+	const { acc_name, account_no, pan_no, ifsc_code, gst_no, aadhar_no, others, mobile,mail,tan_no,user_type,bank_id, bank_account_type_id, is_active } = req.body;
 
 
 	const bankAccounts = await BankAccountService.createBankAccount({
-		name,
+		acc_name,
 		account_no,
 		pan_no,
 		ifsc_code,
 		gst_no,
 		aadhar_no,
-		other_names,
+		mobile,
+		mail,
+		tan_no,
+		others,
+		user_type,
 		bank_id,
 		bank_account_type_id,
 		is_active,
 	}, extras);
 
 	await extras.transaction.commit();
-	return res.sendRes(bankAccounts, { message: 'Bank created successfully', status: STATUS_CODE.OK });
+	return res.sendRes(bankAccounts, { message: 'Bank Account created successfully', status: STATUS_CODE.OK });
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
@@ -48,43 +52,65 @@ const getAll = routeHandler(async (req, res, extras) => {
 	});
 
 	return res.sendRes(bankAccounts, {
-		message: 'Banks loaded successfully',
+		message: 'Bank Accounts loaded successfully',
 		total: await Bank.count(),
 	});
 }, false);
 
 const getById = routeHandler(async (req, res, extras) => {
-	const { account_id } = req.params;
+	const { bank_account_id } = req.params;
 
 	// /** @type {TTransfer} */
-	const designation = await findModelOrThrow({ account_no }, Bank);
+	const account = await findModelOrThrow({ bank_account_id }, BankAccount,{include: [
+		{
+			model: Bank,
+			as: "bank"
+		},
+		{
+			model: BankAccountType,
+			as: 'bankAccountType'
+		}
+
+	]});
 
 
-	return res.sendRes(designation, { message: 'Bank loaded successfully', status: STATUS_CODE.OK });
+	return res.sendRes(account, { message: 'Bank Account loaded successfully', status: STATUS_CODE.OK });
 }, false);
 
 const updateById = routeHandler(async (req, res, extras) => {
-	const { bank_id } = req.params;
-	const { name, is_active } = req.body;
+	const { bank_account_id } = req.params;
+	const { acc_name, account_no, pan_no, ifsc_code, gst_no, aadhar_no, mobile, mail, tan_no, others, user_type, bank_id, bank_account_type_id, is_active } = req.body;
 
-	const state = await BankAccountService.updateBankAccounts({
+	const account = await BankAccountService.updateBankAccounts({
+		bank_account_id,
+		acc_name,
+		account_no,
+		pan_no,
+		ifsc_code,
+		gst_no,
+		aadhar_no,
+		mobile,
+		mail,
+		tan_no,
+		others,
+		user_type,
 		bank_id,
-		name,
+		bank_account_type_id,
 		is_active,
 	}, extras);
 
 	await extras.transaction.commit();
-	return res.sendRes(state, { message: 'Bank updated successfully', status: STATUS_CODE.OK });
+	return res.sendRes(account, { message: 'Bank Account updated successfully', status: STATUS_CODE.OK });
 });
 
 
 const deleteById = routeHandler(async (req, res, extras) => {
-	const { bank_id } = req.params;
+	const { bank_account_id } = req.params;
 
-	await BankAccountService.deleteBankAccount({ bank_id }, extras);
+	await BankAccountService.deleteBankAccount({ bank_account_id }, extras);
 
 	await extras.transaction.commit();
-	return res.sendRes(null, { message: 'Bank deleted successfully', status: STATUS_CODE.OK });
+	return res.sendRes(null, { message: 'Bank Account deleted successfully', status: STATUS_CODE.OK });
 });
 
 module.exports = {

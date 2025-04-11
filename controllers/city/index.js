@@ -60,10 +60,11 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { city_id } = req.params;
-	const { name, is_active } = req.body;
+	const { name, state_id,is_active } = req.body;
 
 	const team = await CityService.updateCities({
 		city_id,
+		state_id,
 		name,
 		is_active,
 	}, extras);

@@ -17,12 +17,18 @@ module.exports = (sequelize) => {
         as: 'bank',
       });
 
+      BankAccount.belongsTo(models.LoginId, {
+        targetKey: 'loginId_id',
+        foreignKey: 'loginId_id',
+        as: 'loginId',
+      });
+
     }
 
   }
   BankAccount.init({
     ...defaultKeys("bank_account_id"),
-    name: {
+    acc_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -46,11 +52,29 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    other_names: {
+    others: {
       type: DataTypes.STRING,
       allowNull: false,
     },
  
+    mobile: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+ 
+    mail: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    tan_no: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  
+    user_type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     is_active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,

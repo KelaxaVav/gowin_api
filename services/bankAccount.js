@@ -12,24 +12,29 @@ class BankAccountService {
      * @param {Extras} extras 
      * @returns 
      */
-    static async createBankAccount({  name, account_no, pan_no, ifsc_code, gst_no, aadhar_no, other_names, bank_id, bank_account_type_id,is_active }, extras) {
+    static async createBankAccount({  acc_name, account_no, pan_no, ifsc_code, gst_no, aadhar_no, others,mobile,mail,tan_no,user_type, bank_id, bank_account_type_id,loginId,is_active }, extras) {
        
-        Validation.nullParameters([name]);
+        Validation.nullParameters([acc_name,account_no,pan_no]);
 
-        const teams = await BankAccount.create({
-            name,
+        const account = await BankAccount.create({
+            acc_name,
             account_no,
             pan_no,
             ifsc_code,
             gst_no,
             aadhar_no,
-            other_names,
+            others,
+            mobile,
+            mail,
+            tan_no,
+            loginId,
+            user_type,
             bank_id,
             bank_account_type_id,
             is_active,
         }, { transaction: extras.transaction });
 
-        return teams;
+        return account;
     }
 
     /**
@@ -41,28 +46,33 @@ class BankAccountService {
     * }} param0 
     * @param {Extras} extras
     */
-   static async updateBankAccounts({ account_no, name, is_active }, extras) {
-        Validation.nullParameters([account_no]);
+   static async updateBankAccounts({ bank_account_id,acc_name, account_no, pan_no, ifsc_code, gst_no, aadhar_no, others,mobile,mail,tan_no,user_type, bank_id,loginId, bank_account_type_id,is_active }, extras) {
+        Validation.nullParameters([bank_account_id]);
 
-       const teams = await findModelOrThrow({ account_no }, BankAccount, {
+       const account = await findModelOrThrow({ bank_account_id }, BankAccount, {
            transaction: extras.transaction,
            lock: true,
        });
 
-       await teams.update({
-            name,
+       await account.update({
+            acc_name,
             account_no,
             pan_no,
             ifsc_code,
             gst_no,
             aadhar_no,
-            other_names,
+            others,
+            mobile,
+            mail,
+            tan_no,
+            loginId,
+            user_type,
             bank_id,
             bank_account_type_id,
             is_active,
        }, { transaction: extras.transaction });
 
-       return teams;
+       return account;
    }
 
     /**
@@ -72,10 +82,10 @@ class BankAccountService {
      * }} param0 
      * @param {*} extras 
      */ 
-    static async deleteBankAccount({ account_no }, extras) {
-        const type = await findModelOrThrow({ account_no }, BankAccount);
+    static async deleteBankAccount({ bank_account_id }, extras) {
+        const account = await findModelOrThrow({ bank_account_id }, BankAccount);
 
-        await type.destroy({ transaction: extras.transaction });
+        await account.destroy({ transaction: extras.transaction });
     }
 }
 

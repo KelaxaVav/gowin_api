@@ -31,8 +31,22 @@ const getAll = routeHandler(async (req, res, extras) => {
 			{
 				model: Branch,
 				as: 'branch',
-			}
-		]
+			},
+			{
+				model: Staff,
+				as: 'branchManager',
+			},
+			{
+				model: Staff,
+				as: 'relationshipManagers',
+				include: [
+					{
+						model: Partner,
+						as: 'partners',
+					},
+				]
+			},
+		],
 	});
 
 	return res.sendRes(teams, {
