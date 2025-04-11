@@ -54,10 +54,11 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { rto_id } = req.params;
-	const { state_id, name, is_active } = req.body;
+	const { state_id,rto_category_id, name, is_active } = req.body;
 
 	const rto = await RTOService.updateRTOs({
 		rto_id,
+		rto_category_id,
 		state_id,
 		name,
 		is_active,
