@@ -7,12 +7,11 @@ const PartnerService = require("../../services/partner");
 const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { name, branch_id, city_id, confirm_password, door_no, email, mobile_no,
+	const { name, city_id, confirm_password, door_no, email, mobile_no,
 		partner_type_id, password, pin_code, staff_id, street, is_active } = req.body;
 
 	const partners = await PartnerService.createPartner({
 		name,
-		branch_id,
 		city_id,
 		confirm_password,
 		door_no,
@@ -78,13 +77,12 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { partner_id } = req.params;
-	const { name, branch_id, city_id, confirm_password, door_no, email, mobile_no,
+	const { name, city_id, confirm_password, door_no, email, mobile_no,
 		partner_type_id, password, pin_code, staff_id, street, is_active } = req.body;
 
 	const partners = await PartnerService.updatePartner({
 		partner_id,
 		name,
-		branch_id,
 		city_id,
 		confirm_password,
 		door_no,
