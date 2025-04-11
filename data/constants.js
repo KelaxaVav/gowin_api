@@ -25,5 +25,15 @@ const GENERAL_TYPES = {
     MAKE: "MAKE",
 }
 
+
 module.exports.GENERAL_TYPES = GENERAL_TYPES
 /** @typedef {keyof typeof GENERAL_TYPES} TGeneralTypes */
+
+const ACC_HOLDER_TYPES = {
+    GOWIN: "GOWIN",
+    BROKER: "BROKER",
+}
+
+
+module.exports.ACC_HOLDER_TYPES = ACC_HOLDER_TYPES
+/** @typedef {keyof typeof ACC_HOLDER_TYPES} TGeneralTypes */

@@ -24,7 +24,7 @@ class BranchService {
             region_id,
         ]);
 
-        await findModelAndThrow({
+        const b = await findModelAndThrow({
             [Op.or]: [
                 { name },
             ],

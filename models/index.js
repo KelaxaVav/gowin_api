@@ -57,6 +57,12 @@ db.Expenses = require("./expenses")(sequelize, Sequelize.DataTypes);
 db.ExpensesCategory = require("./expensesCategory")(sequelize, Sequelize.DataTypes);
 db.ExpensesEntry = require("./expensesEntry")(sequelize, Sequelize.DataTypes);
 db.Partner = require("./partner")(sequelize, Sequelize.DataTypes);
+db.RTO = require("./rto")(sequelize, Sequelize.DataTypes);
+db.RTOCategory = require("./rtoCategory")(sequelize, Sequelize.DataTypes);
+db.LoginId = require("./loginId")(sequelize, Sequelize.DataTypes);
+db.MakeModal = require("./makeModal")(sequelize, Sequelize.DataTypes);
+db.Modal = require("./modal")(sequelize, Sequelize.DataTypes);
+db.Product = require("./product")(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {

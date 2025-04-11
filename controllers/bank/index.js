@@ -7,18 +7,18 @@ const BankService = require("../../services/bank");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { bankNames, is_active } = req.body;
-	let designations = [];
+	let banks = [];
 	bankNames.forEach(async (bank) => {
-		designations.push(
+		banks.push(
 			{
 				name: bank.name,
 				is_active: is_active
 			}
 		);
 	});
-	const designation = await Bank.bulkCreate(designations, { transaction: extras.transaction });
+	const bank = await Bank.bulkCreate(banks, { transaction: extras.transaction });
 	await extras.transaction.commit();
-	return res.sendRes(designation, { message: 'Bank created successfully', status: STATUS_CODE.OK });
+	return res.sendRes(bank, { message: 'Bank created successfully', status: STATUS_CODE.OK });
 });
 
 const getAll = routeHandler(async (req, res, extras) => {

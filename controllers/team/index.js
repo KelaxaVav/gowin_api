@@ -22,7 +22,27 @@ const create = routeHandler(async (req, res, extras) => {
 const getAll = routeHandler(async (req, res, extras) => {
 	const teams = await Team.findAll({
 		...req.paginate,
-		order: [['created_at', 'DESC']]
+		order: [['created_at', 'DESC']],
+		include: [
+			{
+				model: Branch,
+				as: 'branch',
+			},
+			{
+				model: Staff,
+				as: 'branchManager',
+			},
+			{
+				model: Staff,
+				as: 'relationshipManagers',
+				include: [
+					{
+						model: Partner,
+						as: 'partners',
+					},
+				]
+			},
+		],
 	});
 
 	return res.sendRes(teams, {

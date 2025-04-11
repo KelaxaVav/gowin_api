@@ -27,6 +27,7 @@ class CityService {
      * 
      * @param {{
     * city_id:string
+    * state_id:string
     * name:string
     * is_active:boolean
     * }} param0 

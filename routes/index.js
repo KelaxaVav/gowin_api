@@ -36,6 +36,12 @@ const expensesEntryController = require("../controllers/expensesEntry");
 const staffController = require("../controllers/staff");
 
 const pdfController = require("../controllers/pdf");
+const rtoController = require("../controllers/rto");
+const rtoCategoryController = require("../controllers/rtoCategory");
+const loginIdController = require("../controllers/loginId");
+const modalController = require("../controllers/modal");
+const makeModalController = require("../controllers/makeModal");
+const productController = require("../controllers/product");
 
 
 // Role
@@ -224,7 +230,7 @@ router.route("/general/make/single/:make_id")
   .get(makeController.getById)
 
 // Bank
-router.route("/general/bank")
+router.route("/general/bank") 
   .post(bankController.create)
   .get(bankController.getAll);
 router.route("/general/bank/:bank_id")
@@ -237,10 +243,10 @@ router.route("/general/bank/single/:bank_id")
 router.route("/general/bank/account")
   .post(bankAccountController.create)
   .get(bankAccountController.getAll);
-router.route("/general/bank/account/:account_id")
+router.route("/general/bank/account/:bank_account_id")
   .put(bankAccountController.updateById)
   .delete(bankAccountController.deleteById);
-router.route("/general/bank/account/single/:account_id")
+router.route("/general/bank/account/single/:bank_account_id")
   .get(bankAccountController.getById)
 
 // Bank Account Type
@@ -300,5 +306,59 @@ router.route("/expenses/entry/single/:expenses_entry_id")
 //PDF
 router.route("/pdf")
   .post(upload.single('pdf'), pdfController.extractData)
+
+router.route("/general/rto")
+  .post(rtoController.create)
+  .get(rtoController.getAll)
+router.route("/general/rto/:rto_id")
+  .put(rtoController.updateById)
+  .delete(rtoController.deleteById)
+router.route("/general/rto/single/:rto_id")
+  .get(rtoController.getById)
+
+router.route("/general/rto/category")
+  .post(rtoCategoryController.create)
+  .get(rtoCategoryController.getAll)
+router.route("/general/rto/category/:rto_category_id")
+  .put(rtoCategoryController.updateById)
+  .delete(rtoCategoryController.deleteById)
+router.route("/general/rto/category/single/:rto_category_id")
+  .get(rtoCategoryController.getById)
+
+router.route("/general/loginId")
+  .post(loginIdController.create)
+  .get(loginIdController.getAll)
+router.route("/general/loginId/:loginId_id")
+  .put(loginIdController.updateById)
+  .delete(loginIdController.deleteById)
+router.route("/general/loginId/single/:loginId_id")
+  .get(loginIdController.getById)
+
+router.route("/general/modal")
+  .post(modalController.create)
+  .get(modalController.getAll)
+router.route("/general/modal/:modal_id")
+  .put(modalController.updateById)
+  .delete(modalController.deleteById)
+router.route("/general/modal/single/:modal_id")
+  .get(modalController.getById)
+
+router.route("/general/make/modal")
+  .post(makeModalController.create)
+  .get(makeModalController.getAll)
+router.route("/general/make/modal/:make_modal_id")
+  .put(makeModalController.updateById)
+  .delete(makeModalController.deleteById)
+router.route("/general/make/modal/single/:make_modal_id")
+  .get(makeModalController.getById)
+
+router.route("/general/product")
+  .post(productController.create)
+  .get(productController.getAll)
+router.route("/general/product/:product_id")
+  .put(productController.updateById)
+  .delete(productController.deleteById)
+router.route("/general/product/single/:product_id")
+  .get(productController.getById)
 
 module.exports = router;
