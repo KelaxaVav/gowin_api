@@ -51,7 +51,6 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
-	// const { branch_id } = req.branch;
 	const whereOption = whereSearchAndFilter(Staff, req.query);
 
 	const staffs = await Staff.findAll({
@@ -94,6 +93,14 @@ const getById = routeHandler(async (req, res, extras) => {
 		throwOnDeleted: true,
 		include: [
 			{
+				model: Designation,
+				as: 'designation',
+			},
+			{
+				model: Branch,
+				as: 'branch',
+			},
+			{
 				model: City,
 				as: 'city',
 				include: [
@@ -103,7 +110,7 @@ const getById = routeHandler(async (req, res, extras) => {
 					},
 				]
 			},
-		]
+		],
 	});
 
 	return res.sendRes(staff, { message: 'Staff loaded successfully', status: STATUS_CODE.OK });

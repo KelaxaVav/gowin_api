@@ -39,10 +39,12 @@ const getAll = routeHandler(async (req, res, extras) => {
 			{
 				model: Staff,
 				as: 'relationshipManagers',
+				separate: true,
 				include: [
 					{
 						model: Partner,
 						as: 'partners',
+						separate: true,
 					},
 				]
 			},

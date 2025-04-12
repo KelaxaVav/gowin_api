@@ -4,9 +4,10 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const ModalService = require("../../services/modal");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { make_id,make_modal_id, modal_name, gvw, cc, seater, kw, is_active } = req.body;
+	const { make_id, make_modal_id, modal_name, gvw, cc, seater, kw, is_active } = req.body;
 
 	const modal = await ModalService.createModal({
 		make_id,
@@ -24,6 +25,8 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(Modal, req.query);
+
 	const modals = await Modal.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -36,7 +39,8 @@ const getAll = routeHandler(async (req, res, extras) => {
 				model: MakeModal,
 				as: 'make_modal',
 			}
-		]
+		],
+		where: whereOption,
 	});
 
 	return res.sendRes(modals, {
@@ -49,7 +53,7 @@ const getById = routeHandler(async (req, res, extras) => {
 	const { modal_id } = req.params;
 
 	// /** @type {TTransfer} */
-	const modal = await findModelOrThrow({ modal_id }, Modal,{
+	const modal = await findModelOrThrow({ modal_id }, Modal, {
 		include: [
 			{
 				model: Make,
@@ -68,7 +72,7 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { modal_id } = req.params;
-	const { make_id,make_modal_id, modal_name, gvw, cc, seater, kw, is_active } = req.body;
+	const { make_id, make_modal_id, modal_name, gvw, cc, seater, kw, is_active } = req.body;
 
 	const modal = await ModalService.updateModal({
 		modal_id,

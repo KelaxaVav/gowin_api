@@ -4,9 +4,10 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const ProductService = require("../../services/product");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { insurer_id,make_modal_id, name,is_active } = req.body;
+	const { insurer_id, make_modal_id, name, is_active } = req.body;
 
 	const product = await ProductService.createModal({
 		insurer_id,
@@ -20,6 +21,8 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(Product, req.query);
+
 	const products = await Product.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -32,7 +35,8 @@ const getAll = routeHandler(async (req, res, extras) => {
 				model: MakeModal,
 				as: 'make_modal',
 			}
-		]
+		],
+		where: whereOption,
 	});
 
 	return res.sendRes(products, {
@@ -45,7 +49,7 @@ const getById = routeHandler(async (req, res, extras) => {
 	const { product_id } = req.params;
 
 	// /** @type {TTransfer} */
-	const product = await findModelOrThrow({ product_id }, Product,{
+	const product = await findModelOrThrow({ product_id }, Product, {
 		include: [
 			{
 				model: Insurer,
@@ -64,7 +68,7 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { product_id } = req.params;
-	const { make_modal_id,insurer_id,name, is_active } = req.body;
+	const { make_modal_id, insurer_id, name, is_active } = req.body;
 
 	const product = await ProductService.updateModal({
 		product_id,

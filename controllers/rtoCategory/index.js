@@ -4,6 +4,7 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const RTOCategoryService = require("../../services/rtoCategory");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { state_id, insurer_id, rto_id, name, is_active } = req.body;
@@ -20,6 +21,8 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(RTOCategory, req.query);
+
 	const rtoCategories = await RTOCategory.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -32,7 +35,8 @@ const getAll = routeHandler(async (req, res, extras) => {
 				model: Insurer,
 				as: 'insurer',
 			},
-		]
+		],
+		where: whereOption,
 	});
 
 	return res.sendRes(rtoCategories, {
@@ -45,7 +49,7 @@ const getById = routeHandler(async (req, res, extras) => {
 	const { rto_category_id } = req.params;
 
 	// /** @type {TTransfer} */
-	const rtoCategory = await findModelOrThrow({ rto_category_id }, RTOCategory,{
+	const rtoCategory = await findModelOrThrow({ rto_category_id }, RTOCategory, {
 		include: [
 			{
 				model: State,
