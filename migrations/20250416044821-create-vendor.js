@@ -1,20 +1,15 @@
 'use strict';
 const { defaultKeys, migrationDefaults, relationShip } = require('../sequelize/defaults');
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('branches', {
-      ...defaultKeys("branch_id"),
+    await queryInterface.createTable('vendors', {
+      ...defaultKeys("vendor_id"),
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        // unique: true,
       },
-      region_id: relationShip({
-        modelName: "regions",
-        key: "region_id",
-        allowNull: false,
-      }),
       is_active: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
@@ -26,6 +21,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('branches');
+    await queryInterface.dropTable('vendors');
   }
 };

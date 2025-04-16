@@ -42,6 +42,7 @@ const loginIdController = require("../controllers/loginId");
 const modalController = require("../controllers/modal");
 const makeModalController = require("../controllers/makeModal");
 const productController = require("../controllers/product");
+const vendorController = require("../controllers/vendor");
 
 
 // Role
@@ -230,7 +231,7 @@ router.route("/general/make/single/:make_id")
   .get(makeController.getById)
 
 // Bank
-router.route("/general/bank") 
+router.route("/general/bank")
   .post(bankController.create)
   .get(bankController.getAll);
 router.route("/general/bank/:bank_id")
@@ -238,6 +239,16 @@ router.route("/general/bank/:bank_id")
   .delete(bankController.deleteById);
 router.route("/general/bank/single/:bank_id")
   .get(bankController.getById)
+
+// Vendor
+router.route("/general/vendor")
+  .post(vendorController.create)
+  .get(vendorController.getAll);
+router.route("/general/vendor/:vendor_id")
+  .put(vendorController.updateById)
+  .delete(vendorController.deleteById);
+router.route("/general/vendor/single/:vendor_id")
+  .get(vendorController.getById)
 
 // BankAccount
 router.route("/general/bank/account")

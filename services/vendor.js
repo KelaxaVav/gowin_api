@@ -6,27 +6,24 @@ class VendorService {
     /**
      * 
      * @param {{
-    * name:string
-    * branch_id:string
-    * mobile:string
-    * }} param0 
-    * @param {Extras} extras 
-    * @returns 
-    */
-    static async createVendor({ name, branch_id, mobile }, extras) {
-        Validation.nullParameters([name, branch_id, mobile]);
+     * name:string
+     * is_active:boolean
+     * }} param0 
+     * @param {Extras} extras 
+     * @returns 
+     */
+    static async createVendor({ name, is_active }, extras) {
+        Validation.nullParameters([name, is_active]);
         await findModelAndThrow({
             branch_id,
             [Op.or]: [
                 { name, },
-                { mobile, },
             ],
         }, Vendor);
 
         const vendor = await Vendor.create({
             name,
-            branch_id,
-            mobile,
+            is_active,
         }, { transaction: extras.transaction });
 
         return vendor;
@@ -36,32 +33,27 @@ class VendorService {
     * 
     * @param {{
     * vendor_id:string
-    * branch_id:string
     * name:string
-    * mobile:string
-    * status:TVendorStatus
+    * is_active:boolean
     * }} param0 
     * @param {Extras} extras 
     * @returns 
     */
-    static async updateVendor({ vendor_id, branch_id, name, mobile, status }, extras) {
-        Validation.nullParameters([name, mobile]);
+    static async updateVendor({ vendor_id, name, is_active }, extras) {
+        Validation.nullParameters([name]);
 
         const vendor = await findModelOrThrow({ vendor_id }, Vendor);
-        Validation.authority(branch_id, vendor.branch_id);
 
         await findModelAndThrow({
             vendor_id: { [Op.not]: vendor_id },
             [Op.or]: [
                 { name, },
-                { mobile, },
             ],
         }, Vendor);
 
         await vendor.update({
             name,
-            mobile,
-            status,
+            is_active,
         }, { transaction: extras.transaction });
 
         return vendor;
@@ -71,16 +63,14 @@ class VendorService {
      * 
      * @param {{
      * vendor_id:string
-     * branch_id:string
      * }} param0 
      * @param {Extras} extras 
      */
-    static async deleteVendor({ vendor_id, branch_id }, extras) {
+    static async deleteVendor({ vendor_id }, extras) {
         const vendor = await findModelOrThrow({ vendor_id }, Vendor, {
             throwOnDeleted: true,
             messageOnDeleted: "Vendor is already deleted",
         });
-        Validation.authority(branch_id, vendor.branch_id);
 
         await vendor.destroy({ transaction: extras.transaction });
     }

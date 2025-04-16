@@ -63,6 +63,7 @@ db.LoginId = require("./loginId")(sequelize, Sequelize.DataTypes);
 db.MakeModal = require("./makeModal")(sequelize, Sequelize.DataTypes);
 db.Modal = require("./modal")(sequelize, Sequelize.DataTypes);
 db.Product = require("./product")(sequelize, Sequelize.DataTypes);
+db.Vendor = require("./vendor")(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {

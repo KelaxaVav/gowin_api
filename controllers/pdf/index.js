@@ -14,7 +14,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const extractData = routeHandler(async (req, res, extras) => {
     const { pdf_type } = req.query
     // console.log('test');
-    
+
     // try {
     //     if (!req.file) {
     //         return res.status(400).send('No file uploaded.');
@@ -49,10 +49,10 @@ const extractData = routeHandler(async (req, res, extras) => {
         }
         // const prompt = EXTRACT_PROMPT.TW_BIKE_PACKAGE;
         const image = {
-        inlineData: {
-            data: dataBuffer.toString("base64"),
-            mimeType: 'application/pdf',
-        },
+            inlineData: {
+                data: dataBuffer.toString("base64"),
+                mimeType: 'application/pdf',
+            },
         };
 
         // const response = await axios.post(
@@ -82,47 +82,47 @@ const extractData = routeHandler(async (req, res, extras) => {
         //   });
         //   console.log(response.text);
         const result = await model.generateContent([prompt, image]);
-        const responseText  = result.response.text();
+        const responseText = result.response.text();
         let stripped = responseText.trim();
         if (stripped.startsWith('"') && stripped.endsWith('"')) {
-          stripped = stripped.slice(1, -1);
+            stripped = stripped.slice(1, -1);
         }
-        
+
         // Step 4: Unescape characters
         let unescaped = stripped.replace(/\\n/g, '\n').replace(/\\"/g, '"');
-        
+
         // Optional: Log this to debug formatting
         console.log("Unescaped:", unescaped);
-        
+
         // Step 5: Remove ```json\n and \n``` markdown-style markers
         let cleaned = unescaped
-          .replace(/^```json\s*/, '')
-          .replace(/\s*```$/, '')
-          .trim();
+            .replace(/^```json\s*/, '')
+            .replace(/\s*```$/, '')
+            .trim();
 
         const jsonObject = JSON.parse(cleaned);
-        res.json({ text: pdfText, insights: result.response.text(),data :jsonObject });
+        return res.sendRes(jsonObject, { message: 'PDF parsed successfully', status: STATUS_CODE.OK });
     } catch (error) {
         console.error("Error processing PDF:", error);
         res.status(500).json({ error: "Error processing PDF" });
-    } 
+    }
 }, false);
 
-const getFormValues = async (text) =>{
+const getFormValues = async (text) => {
     // console.log(text);
-    
-    if(text.includes('UNITED INDIA INSURANCE COMPANY LIMITED') ){
-       return UnitedIndiaInsurance(text);
-    }else if(text.includes('United India Insurance Company') && text.includes('MOTOR INSURANCE ‐ PRIVATE CAR PACKAGE POLICY SCHEDULE')){
-       return UNITED_PVT_CAR_PACKAGE(text);
-    }else if(text.includes('United India Insurance Company')){
-       return UNITED_PVT_CAR_0(text);
-    }else if(text.includes('SHRIRAM GENERAL INSURANCE COMPANY LIMITED')){
-       return SHRIRAM_TAXI_CAR_PACKAGE(text);
-    }else if (text.includes('CHOLAMANDALAM MS GENERAL INSURANCE COMPANY LTD')){
+
+    if (text.includes('UNITED INDIA INSURANCE COMPANY LIMITED')) {
+        return UnitedIndiaInsurance(text);
+    } else if (text.includes('United India Insurance Company') && text.includes('MOTOR INSURANCE ‐ PRIVATE CAR PACKAGE POLICY SCHEDULE')) {
+        return UNITED_PVT_CAR_PACKAGE(text);
+    } else if (text.includes('United India Insurance Company')) {
+        return UNITED_PVT_CAR_0(text);
+    } else if (text.includes('SHRIRAM GENERAL INSURANCE COMPANY LIMITED')) {
+        return SHRIRAM_TAXI_CAR_PACKAGE(text);
+    } else if (text.includes('CHOLAMANDALAM MS GENERAL INSURANCE COMPANY LTD')) {
         return CholamandalamGeneralInsurance(text);
-    }else{
-        
+    } else {
+
     }
     return null
 }
