@@ -1,0 +1,12 @@
+[
+    {
+        "name": "TW Bike Package",
+        "pdf_type": "TW_BIKE_PACKAGE",
+        "tp_duration": 3
+    },
+    {
+        "name": "TW Bike Bundled",
+        "pdf_type": "TW_BIKE_BUNDLED",
+        "tp_duration": 4
+    }
+]

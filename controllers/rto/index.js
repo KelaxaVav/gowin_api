@@ -1,13 +1,14 @@
-const { State, RTO, RTOCategory } = require("../../models");
+const { State, RTO } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const StateService = require("../../services/state");
 const RTOService = require("../../services/rto");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { state_id,rto_category_id, name, is_active } = req.body;
+	const { state_id, rto_category_id, name, is_active } = req.body;
 
 	const rtos = await RTOService.createRTO({
 		state_id,
@@ -21,6 +22,8 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(RTO, req.query);
+
 	const rtos = await RTO.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -29,11 +32,8 @@ const getAll = routeHandler(async (req, res, extras) => {
 				model: State,
 				as: 'state',
 			},
-			{
-				model: RTOCategory,
-				as: 'rto_category',
-			}
-		]
+		],
+		where: whereOption,
 	});
 
 	return res.sendRes(rtos, {
@@ -54,7 +54,7 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { rto_id } = req.params;
-	const { state_id,rto_category_id, name, is_active } = req.body;
+	const { state_id, rto_category_id, name, is_active } = req.body;
 
 	const rto = await RTOService.updateRTOs({
 		rto_id,

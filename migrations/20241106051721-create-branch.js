@@ -15,6 +15,11 @@ module.exports = {
         key: "region_id",
         allowNull: false,
       }),
+      is_active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false,
+      },
       ...migrationDefaults(),
     }, {
       collate: process.env.COLLATE,

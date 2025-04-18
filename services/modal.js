@@ -1,4 +1,4 @@
-const {   Modal } = require("../models");
+const { Modal } = require("../models");
 const { findModelOrThrow, Validation } = require("../utils/validation");
 
 class ModalService {
@@ -17,8 +17,8 @@ class ModalService {
      * @param {Extras} extras 
      * @returns 
      */
-    static async createModal({ make_id,make_modal_id,modal_name, gvw, cc, seater, kw,  is_active }, extras) {
-        Validation.nullParameters([modal_name,make_modal_id]);
+    static async createModal({ make_id, make_modal_id, modal_name, gvw, cc, seater, kw, is_active }, extras) {
+        Validation.nullParameters([modal_name, make_modal_id]);
 
         const modals = await Modal.create({
             make_id,
@@ -40,6 +40,7 @@ class ModalService {
     * modal_id:string
     * make_modal_id:string
     * modal_name:string
+    * make_id:string
     * gvw:string
     * cc:string
     * seater:string
@@ -48,27 +49,28 @@ class ModalService {
     * }} param0 
     * @param {Extras} extras
     */
-   static async updateModal({ modal_id,make_modal_id,modal_name,gvw, cc,seater,kw, is_active }, extras) {
+    static async updateModal({ modal_id, make_modal_id, modal_name, make_id, gvw, cc, seater, kw, is_active }, extras) {
         Validation.nullParameters([modal_id]);
 
-       const modals = await findModelOrThrow({ modal_id }, Modal, {
-           transaction: extras.transaction,
-           lock: true,
-       });
+        const modals = await findModelOrThrow({ modal_id }, Modal, {
+            transaction: extras.transaction,
+            lock: true,
+        });
 
-       await modals.update({
-        make_modal_id,
-        modal_name,
-        gvw,
-        cc,
-        seater,
-        kw,
-        kw,
-        is_active,
-       }, { transaction: extras.transaction });
+        await modals.update({
+            make_modal_id,
+            modal_name,
+            make_id,
+            gvw,
+            cc,
+            seater,
+            kw,
+            kw,
+            is_active,
+        }, { transaction: extras.transaction });
 
-       return modals;
-   }
+        return modals;
+    }
 
     /**
      * 

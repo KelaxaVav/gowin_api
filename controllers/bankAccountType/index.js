@@ -4,6 +4,7 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const BankAccountTypeService = require("../../services/bankAccountType");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { accountType, is_active } = req.body;
@@ -22,11 +23,14 @@ const create = routeHandler(async (req, res, extras) => {
 	await extras.transaction.commit();
 	return res.sendRes(accountTypes, { message: 'Bank Account Type created successfully', status: STATUS_CODE.OK });
 });
-  
+
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(BankAccountType, req.query);
+
 	const accountTypes = await BankAccountType.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
+		where: whereOption,
 	});
 
 	return res.sendRes(accountTypes, {

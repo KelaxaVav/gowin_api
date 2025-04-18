@@ -54,23 +54,20 @@ module.exports = (sequelize) => {
     },
     others: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
- 
     mobile: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
- 
     mail: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     tan_no: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  
     user_type: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -81,7 +78,6 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
   }, modelDefaults(sequelize, 'bank_accounts'));
-
 
   return BankAccount;
 };

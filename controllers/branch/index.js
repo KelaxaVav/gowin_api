@@ -52,19 +52,15 @@ const updateById = routeHandler(async (req, res, extras) => {
 
 	const {
 		name,
-		contact,
-		address,
-		code,
-		settings,
+		region_id,
+		is_active,
 	} = req.body;
 
 	const branch = await BranchService.updateBranch({
 		branch_id,
 		name,
-		contact,
-		address,
-		code,
-		settings,
+		region_id,
+		is_active,
 	}, extras);
 
 	await extras.transaction.commit();
@@ -76,19 +72,15 @@ const updateByAuth = routeHandler(async (req, res, extras) => {
 
 	const {
 		name,
-		contact,
-		address,
-		code,
-		settings,
+		region_id,
+		is_active,
 	} = req.body;
 
 	const branch = await BranchService.updateBranch({
 		branch_id,
 		name,
-		contact,
-		address,
-		code,
-		settings,
+		region_id,
+		is_active,
 	}, extras);
 
 	await extras.transaction.commit();

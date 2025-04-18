@@ -4,6 +4,7 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const LoginIdService = require("../../services/loginId");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { insurer_id, loginId, is_active } = req.body;
@@ -19,6 +20,8 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(LoginId, req.query);
+
 	const loginIds = await LoginId.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -28,6 +31,7 @@ const getAll = routeHandler(async (req, res, extras) => {
 				as: 'insurer',
 			},
 		],
+		where: whereOption,
 	});
 
 	return res.sendRes(loginIds, {

@@ -10,10 +10,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      state_id: relationShip({
-        modelName: "states",
-        key: "state_id",
-      }),
       insurer_id: relationShip({
         modelName: "insurers",
         key: "insurer_id",

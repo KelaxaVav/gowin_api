@@ -4,16 +4,12 @@ const { defaultKeys, migrationDefaults, relationShip } = require('../sequelize/d
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('rto', {
-      ...defaultKeys("rto_id"),
+    await queryInterface.createTable('vendors', {
+      ...defaultKeys("vendor_id"),
       name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      state_id: relationShip({
-        modelName: "states",
-        key: "state_id",
-      }),
       is_active: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
@@ -25,6 +21,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('rto');
+    await queryInterface.dropTable('vendors');
   }
 };

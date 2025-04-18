@@ -1,4 +1,4 @@
-const {   Designation } = require("../models");
+const { Designation } = require("../models");
 const { findModelOrThrow, Validation } = require("../utils/validation");
 
 class DesignationService {
@@ -12,15 +12,15 @@ class DesignationService {
      * @param {Extras} extras 
      * @returns 
      */
-    static async createDesignation({  name, is_active }, extras) {
+    static async createDesignation({ name, is_active }, extras) {
         Validation.nullParameters([name]);
 
-        const teams = await Designation.create({
+        const designation = await Designation.create({
             name,
             is_active,
         }, { transaction: extras.transaction });
 
-        return teams;
+        return designation;
     }
 
     /**
@@ -32,21 +32,21 @@ class DesignationService {
     * }} param0 
     * @param {Extras} extras
     */
-   static async updateDesignations({ designation_id, name, is_active }, extras) {
+    static async updateDesignation({ designation_id, name, is_active }, extras) {
         Validation.nullParameters([designation_id]);
 
-       const teams = await findModelOrThrow({ designation_id }, Designation, {
-           transaction: extras.transaction,
-           lock: true,
-       });
+        const teams = await findModelOrThrow({ designation_id }, Designation, {
+            transaction: extras.transaction,
+            lock: true,
+        });
 
-       await teams.update({
-        name,
-        is_active,
-       }, { transaction: extras.transaction });
+        await teams.update({
+            name,
+            is_active,
+        }, { transaction: extras.transaction });
 
-       return teams;
-   }
+        return teams;
+    }
 
     /**
      * 

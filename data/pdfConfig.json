@@ -1,0 +1,28 @@
+{
+    "TW_BIKE_BUNDLED": {
+        "query": "Extract the mentioned data as json object not text.",
+        "data": {
+            "receipt_date": "Receipt Date as receipt_date",
+            "name_of_the_insured": "Insured Name",
+            "name_of_the_insured_id": "Insured ID",
+            "policy_no": "Policy Number as policy_no",
+            "mobile_no": "Mobile as mobile_no",
+            "tp_start_date": "Period of Insurance(Liability) start",
+            "tp_end_date": "Period of Insurance(Liability) end",
+            "od_start_date": "Period of Insurance(Own Damage) start",
+            "od_end_date": "Period of Insurance(Own Damage) end",
+            "make": "Vehicle Make / Model the first part before ambersand symbol as make",
+            "reg_date": "Registration Date as reg_date",
+            "rto_name": "RTA Name as rto_name",
+            "reg_no": "Registration No as reg_no",
+            "yom": "Year of Manufacture as yom",
+            "chassis_no": "Chassis Number as chassis_no",
+            "cc": "Cubic Capacity /Kw as cc",
+            "ODP": "Gross Od(A) as ODP",
+            "tpp": "Total Liability Premium as tpp",
+            "net_premium": "Premium(A+B) as net_premium",
+            "gross_premium": "TOTAL PAYABLE PREMIUM"
+        },
+        "return_type": "json only"
+    }
+}

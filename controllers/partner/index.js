@@ -4,14 +4,14 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const PartnerService = require("../../services/partner");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { name, branch_id, city_id, confirm_password, door_no, email, mobile_no,
+	const { name, city_id, confirm_password, door_no, email, mobile_no,
 		partner_type_id, password, pin_code, staff_id, street, is_active } = req.body;
 
 	const partners = await PartnerService.createPartner({
 		name,
-		branch_id,
 		city_id,
 		confirm_password,
 		door_no,
@@ -30,9 +30,22 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(Partner, req.query);
+
 	const partners = await Partner.findAll({
 		...req.paginate,
-		order: [['created_at', 'DESC']]
+		order: [['created_at', 'DESC']],
+		include: [
+			{
+				model: Staff,
+				as: 'staff',
+			},
+			{
+				model: City,
+				as: 'city',
+			},
+		],
+		where: whereOption,
 	});
 
 	return res.sendRes(partners, {
@@ -64,13 +77,12 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { partner_id } = req.params;
-	const { name, branch_id, city_id, confirm_password, door_no, email, mobile_no,
+	const { name, city_id, confirm_password, door_no, email, mobile_no,
 		partner_type_id, password, pin_code, staff_id, street, is_active } = req.body;
 
 	const partners = await PartnerService.updatePartner({
 		partner_id,
 		name,
-		branch_id,
 		city_id,
 		confirm_password,
 		door_no,
@@ -88,17 +100,18 @@ const updateById = routeHandler(async (req, res, extras) => {
 	return res.sendRes(partners, { message: 'Partner updated successfully', status: STATUS_CODE.OK });
 });
 
-
 const deleteById = routeHandler(async (req, res, extras) => {
-	const { partner_type_id } = req.params;
+	const { partner_id } = req.params;
 
-	await PartnerService.deleteType({ partner_type_id }, extras);
+	await PartnerService.deletePartner({ partner_id }, extras);
 
 	await extras.transaction.commit();
 	return res.sendRes(null, { message: 'Partner deleted successfully', status: STATUS_CODE.OK });
 });
 
 const getCreatePartnerTypeData = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(State, req.query);
+
 	const state = await State.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
@@ -107,7 +120,8 @@ const getCreatePartnerTypeData = routeHandler(async (req, res, extras) => {
 				model: City,
 				as: 'cities',
 			}
-		]
+		],
+		where: whereOption,
 	});
 
 	const pinCodes = await PinCode.findAll({

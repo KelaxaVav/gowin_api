@@ -1,14 +1,11 @@
-const { Transfer, Branch, TransferItem, Batch, Item, Category, Type } = require("../../models");
+const { Transfer, Type } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
-const { whereSearchAndFilter } = require("../../helper/common");
-const TransferService = require("../../services/transfer");
-const { Op } = require("sequelize");
 const TypesService = require("../../services/types");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { name, is_active,type } = req.body;
+	const { name, is_active, type } = req.body;
 
 	const types = await TypesService.createType({
 		name,

@@ -5,6 +5,7 @@ const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const TeamService = require("../../services/team");
 const { ROLES } = require("../../data/constants");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
 	const { name, branch_id, is_active } = req.body;
@@ -20,9 +21,12 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(Team, req.query);
+
 	const teams = await Team.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
+		where: whereOption,
 		include: [
 			{
 				model: Branch,
@@ -35,10 +39,12 @@ const getAll = routeHandler(async (req, res, extras) => {
 			{
 				model: Staff,
 				as: 'relationshipManagers',
+				separate: true,
 				include: [
 					{
 						model: Partner,
 						as: 'partners',
+						separate: true,
 					},
 				]
 			},

@@ -13,9 +13,7 @@ const authController = require("../controllers/auth");
 const userController = require("../controllers/user");
 const assetController = require("../controllers/asset");
 const settingController = require("../controllers/setting");
-const templateController = require("../controllers/template");
 const branchController = require("../controllers/branch");
-// const expenseController = require("../controllers/expense");
 
 const typesController = require("../controllers/types");
 const teamsController = require("../controllers/team");
@@ -42,7 +40,9 @@ const loginIdController = require("../controllers/loginId");
 const modalController = require("../controllers/modal");
 const makeModalController = require("../controllers/makeModal");
 const productController = require("../controllers/product");
-
+const vendorController = require("../controllers/vendor");
+const policyController = require("../controllers/policy");
+const claimController = require("../controllers/claim");
 
 // Role
 router.route("/role")
@@ -116,19 +116,6 @@ router.route("/setting/type/:type")
   .get(settingController.getAllByType);
 router.route("/setting/type/:type/name/:name")
   .get(settingController.getByTypeName);
-
-// Template
-router.route("/template")
-  .post(templateController.create)
-  .get(templateController.getAll);
-router.route("/template/:template_id")
-  .get(templateController.getById)
-  .put(templateController.updateById)
-  .delete(templateController.deleteById);
-router.route("/template/type/:type")
-  .get(templateController.getAllByType);
-router.route("/template/type/:type/name/:name")
-  .get(templateController.getByTypeName);
 
 // Branch
 router.route("/branch")
@@ -230,7 +217,7 @@ router.route("/general/make/single/:make_id")
   .get(makeController.getById)
 
 // Bank
-router.route("/general/bank") 
+router.route("/general/bank")
   .post(bankController.create)
   .get(bankController.getAll);
 router.route("/general/bank/:bank_id")
@@ -238,6 +225,16 @@ router.route("/general/bank/:bank_id")
   .delete(bankController.deleteById);
 router.route("/general/bank/single/:bank_id")
   .get(bankController.getById)
+
+// Vendor
+router.route("/general/vendor")
+  .post(vendorController.create)
+  .get(vendorController.getAll);
+router.route("/general/vendor/:vendor_id")
+  .put(vendorController.updateById)
+  .delete(vendorController.deleteById);
+router.route("/general/vendor/single/:vendor_id")
+  .get(vendorController.getById)
 
 // BankAccount
 router.route("/general/bank/account")
@@ -307,6 +304,10 @@ router.route("/expenses/entry/single/:expenses_entry_id")
 router.route("/pdf")
   .post(upload.single('pdf'), pdfController.extractData)
 
+//PDF
+router.route("/pdf/extract")
+  .post(upload.single('pdf'), pdfController.extractPDF)
+
 router.route("/general/rto")
   .post(rtoController.create)
   .get(rtoController.getAll)
@@ -360,5 +361,23 @@ router.route("/general/product/:product_id")
   .delete(productController.deleteById)
 router.route("/general/product/single/:product_id")
   .get(productController.getById)
+
+router.route("/general/policy")
+  .post(policyController.create)
+  .get(policyController.getAll)
+router.route("/general/policy/:policy_id")
+  .put(policyController.updateById)
+  .delete(policyController.deleteById)
+router.route("/general/policy/single/:policy_id")
+  .get(policyController.getById)
+
+router.route("/general/claim")
+  .post(claimController.create)
+  .get(claimController.getAll)
+router.route("/general/claim/:claim_id")
+  .put(claimController.updateById)
+  .delete(claimController.deleteById)
+router.route("/general/claim/single/:claim_id")
+  .get(claimController.getById)
 
 module.exports = router;

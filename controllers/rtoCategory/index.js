@@ -4,14 +4,16 @@ const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
 const { Op } = require("sequelize");
 const RTOCategoryService = require("../../services/rtoCategory");
+const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { state_id, insurer_id, rto_id, name, is_active } = req.body;
+	const { state_id, insurer_id, rto_ids, name, is_active } = req.body;
 
 	const rtoCategory = await RTOCategoryService.createRTOCategory({
 		state_id,
 		insurer_id,
 		name,
+		rto_ids,
 		is_active,
 	}, extras);
 
@@ -20,19 +22,18 @@ const create = routeHandler(async (req, res, extras) => {
 });
 
 const getAll = routeHandler(async (req, res, extras) => {
+	const whereOption = whereSearchAndFilter(RTOCategory, req.query);
+
 	const rtoCategories = await RTOCategory.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
 		include: [
 			{
-				model: State,
-				as: 'state',
-			},
-			{
 				model: Insurer,
 				as: 'insurer',
 			},
-		]
+		],
+		where: whereOption,
 	});
 
 	return res.sendRes(rtoCategories, {
@@ -44,12 +45,17 @@ const getAll = routeHandler(async (req, res, extras) => {
 const getById = routeHandler(async (req, res, extras) => {
 	const { rto_category_id } = req.params;
 
-	// /** @type {TTransfer} */
-	const rtoCategory = await findModelOrThrow({ rto_category_id }, RTOCategory,{
+	const rtoCategory = await findModelOrThrow({ rto_category_id }, RTOCategory, {
 		include: [
 			{
-				model: State,
-				as: 'state',
+				model: RTO,
+				as: 'rtos',
+				include: [
+					{
+						model: State,
+						as: 'state',
+					}
+				]
 			},
 			{
 				model: Insurer,
@@ -64,13 +70,14 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { rto_category_id } = req.params;
-	const { state_id, insurer_id, name, is_active } = req.body;
+	const { state_id, insurer_id, name, rto_ids, is_active } = req.body;
 
 	const rtoCategory = await RTOCategoryService.updateRTOCategory({
 		rto_category_id,
 		state_id,
 		insurer_id,
 		name,
+		rto_ids,
 		is_active,
 	}, extras);
 

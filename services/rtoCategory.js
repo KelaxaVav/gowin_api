@@ -1,27 +1,37 @@
-const {   RTOCategory } = require("../models");
+const { RTOCategory, RTO } = require("../models");
 const { findModelOrThrow, Validation } = require("../utils/validation");
 
 class RTOCategoryService {
     /**
      * 
      * @param {{
-     * state_id:string
      * insurer_id:string
      * name:string
+     * rto_ids:string[]
      * is_active:boolean
      * }} param0 
      * @param {Extras} extras 
      * @returns 
      */
-    static async createRTOCategory({ state_id,insurer_id, name, is_active }, extras) {
-        Validation.nullParameters([state_id,insurer_id, name]);
+    static async createRTOCategory({ insurer_id, name, rto_ids, is_active }, extras) {
+        Validation.nullParameters([insurer_id, name]);
+
+        let rtos;
+        if (rto_ids?.length) {
+            rtos = await RTO.findAll({
+                where: {
+                    rto_id: rto_ids,
+                },
+            });
+        }
 
         const rtoCategory = await RTOCategory.create({
-            state_id,
             insurer_id,
             name,
             is_active,
         }, { transaction: extras.transaction });
+
+        rtos?.length && await rtoCategory.setRtos(rtos, { transaction: extras.transaction });
 
         return rtoCategory;
     }
@@ -29,30 +39,40 @@ class RTOCategoryService {
     /**
      * 
      * @param {{
-    * rto_category_id:string
-    * state_id:string
-    * name:string
-    * is_active:boolean
-    * }} param0 
-    * @param {Extras} extras
-    */
-   static async updateRTOCategory({ rto_category_id, state_id,insurer_id,name, is_active }, extras) {
+     * rto_category_id:string
+     * name:string
+     * rto_ids:string[]
+     * is_active:boolean
+     * }} param0 
+     * @param {Extras} extras
+     */
+    static async updateRTOCategory({ rto_category_id, insurer_id, name, rto_ids, is_active }, extras) {
         Validation.nullParameters([rto_category_id]);
 
-       const rtoCategory = await findModelOrThrow({ rto_category_id }, RTOCategory, {
-           transaction: extras.transaction,
-           lock: true,
-       });
+        const rtoCategory = await findModelOrThrow({ rto_category_id }, RTOCategory, {
+            transaction: extras.transaction,
+            lock: true,
+        });
 
-       await rtoCategory.update({
-        state_id,
-        insurer_id,
-        name,
-        is_active,
-       }, { transaction: extras.transaction });
+        let rtos;
+        if (rto_ids?.length) {
+            rtos = await RTO.findAll({
+                where: {
+                    rto_id: rto_ids,
+                },
+            });
+        }
 
-       return rtoCategory;
-   }
+        await rtoCategory.update({
+            insurer_id,
+            name,
+            is_active,
+        }, { transaction: extras.transaction });
+
+        rtos?.length && await rtoCategory.setRtos(rtos, { transaction: extras.transaction });
+
+        return rtoCategory;
+    }
 
     /**
      * 

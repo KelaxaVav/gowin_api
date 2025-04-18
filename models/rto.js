@@ -9,10 +9,15 @@ module.exports = (sequelize) => {
         targetKey: 'state_id',
         as: 'state',
       });
-      RTO.belongsTo(models.RTOCategory, {
-        foreignKey: 'rto_category_id',
+
+      // RTOCategory
+      RTO.belongsToMany(models.RTOCategory, {
+        through: models.RTORTOCategory,
+        sourceKey: 'rto_id',
+        foreignKey: 'rto_id',
         targetKey: 'rto_category_id',
-        as: 'rto_category',
+        otherKey: 'rto_category_id',
+        as: 'rtoCategories',
       });
     }
   }
@@ -28,7 +33,6 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
   }, modelDefaults(sequelize, 'rto'));
-
 
   return RTO;
 };

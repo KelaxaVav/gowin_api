@@ -15,13 +15,15 @@ class BranchService {
      * region_id:string
      * designation_id?:string
      * city_id?:string
+     * is_active:string
      * }} param0 
      * @param {Extras} extras 
      */
-    static async createBranch({ name, branch_id, region_id, designation_id, city_id }, extras) {
+    static async createBranch({ name, branch_id, region_id, designation_id, city_id, is_active }, extras) {
         Validation.nullParameters([
             name,
             region_id,
+            is_active,
         ]);
 
         const b = await findModelAndThrow({
@@ -38,6 +40,7 @@ class BranchService {
             branch_id,
             name,
             region_id,
+            is_active,
             // roles: [
             //     { name: 'BRANCH_ADMIN' },
             //     { name: 'BRANCH_MANAGER' },
@@ -81,10 +84,11 @@ class BranchService {
      * branch_id:string
      * name:string
      * region_id:string
+     * is_active:boolean
      * }} param0 
      * @param {Extras} extras 
      */
-    static async updateBranch({ branch_id, name, region_id }, extras) {
+    static async updateBranch({ branch_id, name, region_id, is_active }, extras) {
         Validation.nullParameters([
             name,
         ]);
@@ -101,6 +105,7 @@ class BranchService {
         await branch.update({
             name,
             region_id,
+            is_active,
         }, { transaction: extras.transaction });
 
         return branch;

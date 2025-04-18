@@ -179,10 +179,10 @@ class StaffService {
         role && Validation.isTrue(ROLES[role]);
 
         if (designation_id && designation_id != staff.designation_id) {
-            await findModelOrThrow({ designation_id, branch_id }, Designation);
+            await findModelOrThrow({ designation_id }, Designation);
         }
         if (city_id && city_id != staff.city_id) {
-            await findModelOrThrow({ city_id, branch_id }, City);
+            await findModelOrThrow({ city_id }, City);
         }
 
         const universalUniqueFields = { mobile_no, email };
