@@ -10,6 +10,7 @@ const create = routeHandler(async (req, res, extras) => {
 	const { name, is_active } = req.body;
 
 	const vendor = await VendorService.createVendor({ name, is_active }, { transaction: extras.transaction });
+
 	await extras.transaction.commit();
 	return res.sendRes(vendor, { message: 'Vendor created successfully', status: STATUS_CODE.OK });
 });

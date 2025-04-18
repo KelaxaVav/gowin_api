@@ -1,4 +1,4 @@
-const { Bank, BankAccountType, BankAccount } = require("../../models");
+const { Bank, BankAccountType, BankAccount, LoginId } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
@@ -44,8 +44,11 @@ const getAll = routeHandler(async (req, res, extras) => {
 			{
 				model: BankAccountType,
 				as: 'bankAccountType'
-			}
-
+			},
+			{
+				model: LoginId,
+				as: "loginId"
+			},
 		],
 		where: whereOption,
 	});
@@ -69,8 +72,11 @@ const getById = routeHandler(async (req, res, extras) => {
 			{
 				model: BankAccountType,
 				as: 'bankAccountType'
-			}
-
+			},
+			{
+				model: LoginId,
+				as: "loginId"
+			},
 		]
 	});
 

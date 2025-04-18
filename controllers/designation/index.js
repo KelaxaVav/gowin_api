@@ -47,7 +47,7 @@ const updateById = routeHandler(async (req, res, extras) => {
 	const { designation_id } = req.params;
 	const { name, is_active } = req.body;
 
-	const state = await DesignationService.updateDesignations({
+	const state = await DesignationService.updateDesignation({
 		designation_id,
 		name,
 		is_active,

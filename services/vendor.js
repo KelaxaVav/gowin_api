@@ -15,7 +15,6 @@ class VendorService {
     static async createVendor({ name, is_active }, extras) {
         Validation.nullParameters([name, is_active]);
         await findModelAndThrow({
-            branch_id,
             [Op.or]: [
                 { name, },
             ],

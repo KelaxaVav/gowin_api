@@ -2,17 +2,24 @@ const { Product, Insurer, MakeModal } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
-const { Op } = require("sequelize");
 const ProductService = require("../../services/product");
 const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { insurer_id, make_modal_id, name, is_active } = req.body;
+	const { insurer_id, make_modal_id, name, pdf_type,
+		tp_duration, cc, gvw, kw, seat, age, is_active } = req.body;
 
 	const product = await ProductService.createModal({
 		insurer_id,
 		make_modal_id,
 		name,
+		pdf_type,
+		tp_duration,
+		cc,
+		gvw,
+		kw,
+		seat,
+		age,
 		is_active,
 	}, extras);
 
@@ -68,13 +75,21 @@ const getById = routeHandler(async (req, res, extras) => {
 
 const updateById = routeHandler(async (req, res, extras) => {
 	const { product_id } = req.params;
-	const { make_modal_id, insurer_id, name, is_active } = req.body;
+	const { make_modal_id, insurer_id, name, pdf_type,
+		tp_duration, cc, gvw, kw, seat, age, is_active } = req.body;
 
 	const product = await ProductService.updateModal({
 		product_id,
 		insurer_id,
 		make_modal_id,
 		name,
+		pdf_type,
+		tp_duration,
+		cc,
+		gvw,
+		kw,
+		seat,
+		age,
 		is_active,
 	}, extras);
 

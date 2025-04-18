@@ -2,25 +2,59 @@
 const { Model, DataTypes } = require('sequelize');
 const { defaultKeys, modelDefaults } = require('../sequelize/defaults');
 module.exports = (sequelize) => {
-  class Modal extends Model {
+  class Product extends Model {
     static associate(models) {
-      Modal.belongsTo(models.MakeModal, {
+      Product.belongsTo(models.MakeModal, {
         foreignKey: 'make_modal_id',
         targetKey: 'make_modal_id',
         as: 'make_modal',
       });
-      
-      Modal.belongsTo(models.Insurer, {
+
+      Product.belongsTo(models.Insurer, {
         foreignKey: 'insurer_id',
         targetKey: 'insurer_id',
         as: 'insurer',
       });
     }
   }
-  Modal.init({
+
+  Product.init({
     ...defaultKeys("product_id"),
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    pdf_type: {
+      type: DataTypes.STRING,
+      allowNull: null,
+    },
+    tp_duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    cc: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    gvw: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    kw: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    seat: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
+    age: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
       allowNull: false,
     },
     is_active: {
@@ -30,6 +64,5 @@ module.exports = (sequelize) => {
     },
   }, modelDefaults(sequelize, 'products'));
 
-
-  return Modal;
+  return Product;
 };

@@ -14,7 +14,7 @@ class BankAccountService {
      */
     static async createBankAccount({ acc_name, account_no, pan_no, ifsc_code, gst_no, aadhar_no, others, mobile, mail, tan_no, user_type, bank_id, bank_account_type_id, loginId, is_active }, extras) {
 
-        Validation.nullParameters([acc_name, account_no, pan_no, mail]);
+        Validation.nullParameters([acc_name, account_no, pan_no]);
 
         const account = await BankAccount.create({
             acc_name,

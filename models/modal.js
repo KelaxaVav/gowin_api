@@ -49,6 +49,5 @@ module.exports = (sequelize) => {
     },
   }, modelDefaults(sequelize, 'modals'));
 
-
   return Modal;
 };

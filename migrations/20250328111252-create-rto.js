@@ -14,10 +14,6 @@ module.exports = {
         modelName: "states",
         key: "state_id",
       }),
-      rto_category_id: relationShip({
-        modelName: "rto_category",
-        key: "rto_category_id",
-      }),
       is_active: {
         type: Sequelize.BOOLEAN,
         defaultValue: true,

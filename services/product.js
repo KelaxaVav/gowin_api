@@ -13,13 +13,21 @@ class ProductService {
      * @param {Extras} extras 
      * @returns 
      */
-    static async createModal({ insurer_id,make_modal_id,name, is_active }, extras) {
-        Validation.nullParameters([insurer_id,make_modal_id,name]);
+    static async createModal({ insurer_id, make_modal_id, name, pdf_type,
+        tp_duration, cc, gvw, kw, seat, age, is_active }, extras) {
+        Validation.nullParameters([insurer_id, make_modal_id, name]);
 
         const product = await Product.create({
             insurer_id,
             make_modal_id,
             name,
+            pdf_type,
+            tp_duration,
+            cc,
+            gvw,
+            kw,
+            seat,
+            age,
             is_active,
         }, { transaction: extras.transaction });
 
@@ -29,32 +37,40 @@ class ProductService {
     /**
      * 
      * @param {{
-    * product_id:string
-    * insurer_id:string
-    * make_modal_id:string
-    * name:string
-    * is_active:boolean
-    * }} param0 
-    * @param {Extras} extras
-    */
-   static async updateModal({ product_id,insurer_id,make_modal_id,name, is_active }, extras) {
+     * product_id:string
+     * insurer_id:string
+     * make_modal_id:string
+     * name:string
+     * is_active:boolean
+     * }} param0 
+     * @param {Extras} extras
+     */
+    static async updateModal({ product_id, insurer_id, make_modal_id, name, pdf_type,
+        tp_duration, cc, gvw, kw, seat, age, is_active }, extras) {
         Validation.nullParameters([product_id]);
 
-       const product = await findModelOrThrow({ product_id }, Product, {
-           transaction: extras.transaction,
-           lock: true,
-       });
+        const product = await findModelOrThrow({ product_id }, Product, {
+            transaction: extras.transaction,
+            lock: true,
+        });
 
-       await product.update({
-        product_id,
-        insurer_id,
-        make_modal_id,
-        name,
-        is_active,
-       }, { transaction: extras.transaction });
+        await product.update({
+            product_id,
+            insurer_id,
+            make_modal_id,
+            name,
+            pdf_type,
+            tp_duration,
+            cc,
+            gvw,
+            kw,
+            seat,
+            age,
+            is_active,
+        }, { transaction: extras.transaction });
 
-       return product;
-   }
+        return product;
+    }
 
     /**
      * 
@@ -65,8 +81,8 @@ class ProductService {
      */
     static async deleteModal({ product_id }, extras) {
         const product = await findModelOrThrow({ product_id }, Product);
-        
-        await product .destroy({ transaction: extras.transaction });
+
+        await product.destroy({ transaction: extras.transaction });
     }
 }
 

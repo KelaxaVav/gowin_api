@@ -64,6 +64,9 @@ db.MakeModal = require("./makeModal")(sequelize, Sequelize.DataTypes);
 db.Modal = require("./modal")(sequelize, Sequelize.DataTypes);
 db.Product = require("./product")(sequelize, Sequelize.DataTypes);
 db.Vendor = require("./vendor")(sequelize, Sequelize.DataTypes);
+db.Policy = require("./policy")(sequelize, Sequelize.DataTypes);
+db.RTORTOCategory = require("./rtoRtoCategory")(sequelize, Sequelize.DataTypes);
+db.Claim = require("./claim")(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {

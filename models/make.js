@@ -3,12 +3,16 @@ const { Model, DataTypes } = require('sequelize');
 const { defaultKeys, modelDefaults } = require('../sequelize/defaults');
 const { GENERAL_TYPES } = require('../data/constants');
 module.exports = (sequelize) => {
-  class Type extends Model {
+  class Make extends Model {
     static associate(models) {
-    
+      Make.hasMany(models.MakeModal, {
+        sourceKey: 'make_id',
+        foreignKey: 'make_id',
+        as: 'makeModals',
+      })
     }
   }
-  Type.init({
+  Make.init({
     ...defaultKeys("make_id"),
     name: {
       type: DataTypes.STRING,
@@ -22,5 +26,5 @@ module.exports = (sequelize) => {
   }, modelDefaults(sequelize, 'makes'));
 
 
-  return Type;
+  return Make;
 };

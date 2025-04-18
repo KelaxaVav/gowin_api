@@ -1,4 +1,4 @@
-const { State, RTO, RTOCategory } = require("../../models");
+const { State, RTO } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
@@ -32,10 +32,6 @@ const getAll = routeHandler(async (req, res, extras) => {
 				model: State,
 				as: 'state',
 			},
-			{
-				model: RTOCategory,
-				as: 'rto_category',
-			}
 		],
 		where: whereOption,
 	});

@@ -4,7 +4,11 @@ const { defaultKeys, modelDefaults } = require('../sequelize/defaults');
 module.exports = (sequelize) => {
   class Insurer extends Model {
     static associate(models) {
-    
+      Insurer.hasMany(models.RTOCategory, {
+        sourceKey: 'insurer_id',
+        foreignKey: 'insurer_id',
+        as: 'rtoCategories',
+      });
     }
   }
   Insurer.init({
