@@ -1,4 +1,4 @@
-const { Policy, Insurer, MakeModal, Product } = require("../../models");
+const { Policy, Insurer, MakeModal, Product, LoginId, Partner, RTO } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
@@ -96,6 +96,18 @@ const getAll = routeHandler(async (req, res, extras) => {
 						as: 'insurer',
 					},
 				]
+			},
+			{
+				model: LoginId,
+				as: 'loginId',
+			},
+			{
+				model: Partner,
+				as: 'partner',
+			},
+			{
+				model: RTO,
+				as: 'partner',
 			},
 		],
 		where: whereOption,
