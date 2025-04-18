@@ -4,7 +4,7 @@ const { STATUS_CODE } = require("../../utils/utility");
 const { UnitedIndiaInsurance, CholamandalamGeneralInsurance, UNITED_PVT_CAR_0, UNITED_PVT_CAR_PACKAGE, SHRIRAM_TAXI_CAR_PACKAGE } = require("./extract");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { EXTRACT_PROMPT } = require("./constants");
-const PDFService = require("./pdfService");
+const PDFService = require("./service");
 
 const genAI = new GoogleGenerativeAI('AIzaSyD8V9gB9BrtGC4itn0pcFOtISQcV7YwsN8');
 
