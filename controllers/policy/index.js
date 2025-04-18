@@ -105,10 +105,6 @@ const getAll = routeHandler(async (req, res, extras) => {
 				model: Partner,
 				as: 'partner',
 			},
-			{
-				model: RTO,
-				as: 'rto',
-			},
 		],
 		where: whereOption,
 	});

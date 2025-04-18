@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
     },
     tp_duration: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     cc: {
       type: DataTypes.BOOLEAN,
