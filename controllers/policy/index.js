@@ -1,4 +1,4 @@
-const { Policy, Insurer, MakeModal, Product, LoginId, Partner, RTO } = require("../../models");
+const { Policy, Insurer, MakeModal, Product, LoginId, Partner, RTO, Branch, Staff } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
@@ -22,6 +22,7 @@ const create = routeHandler(async (req, res, extras) => {
 		tp_start_date,
 		od_start_date,
 		insured_name,
+		insured_id,
 		mobile_no,
 		email_id,
 		reg_no,
@@ -55,6 +56,7 @@ const create = routeHandler(async (req, res, extras) => {
 		tp_start_date: tp_start_date ? new Date(tp_start_date) : null,
 		od_start_date: od_start_date ? new Date(od_start_date) : null,
 		insured_name,
+		insured_id,
 		mobile_no,
 		email_id,
 		reg_no,
@@ -104,6 +106,18 @@ const getAll = routeHandler(async (req, res, extras) => {
 			{
 				model: Partner,
 				as: 'partner',
+				include: [
+					{
+						model: Staff,
+						as: 'staff',
+						include: [
+							{
+								model: Branch,
+								as: 'branch',
+							}
+						]
+					}
+				]
 			},
 		],
 		where: whereOption,

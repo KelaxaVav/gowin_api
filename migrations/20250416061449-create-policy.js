@@ -66,6 +66,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      insured_id: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       mobile_no: {
         type: Sequelize.STRING,
         allowNull: true,

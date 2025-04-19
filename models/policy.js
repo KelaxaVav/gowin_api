@@ -104,6 +104,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    insured_id: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     mobile_no: {
       type: DataTypes.STRING,
       allowNull: true,

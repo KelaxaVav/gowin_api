@@ -1,4 +1,4 @@
-const { Claim } = require("../../models");
+const { Claim, Policy, Product, Insurer, LoginId, Partner, Staff, Branch } = require("../../models");
 const { STATUS_CODE } = require("../../utils/utility");
 const routeHandler = require("../../utils/routeHandler");
 const { findModelOrThrow } = require("../../utils/validation");
@@ -39,6 +39,45 @@ const getAll = routeHandler(async (req, res, extras) => {
 	const claims = await Claim.findAll({
 		...req.paginate,
 		order: [['created_at', 'DESC']],
+		include: [
+			{
+				model: Policy,
+				as: 'policy',
+				paranoid: false,
+				include: [
+					{
+						model: Product,
+						as: 'product',
+						include: [
+							{
+								model: Insurer,
+								as: 'insurer',
+							},
+						]
+					},
+					{
+						model: LoginId,
+						as: 'loginId',
+					},
+					{
+						model: Partner,
+						as: 'partner',
+						include: [
+							{
+								model: Staff,
+								as: 'staff',
+								include: [
+									{
+										model: Branch,
+										as: 'branch',
+									}
+								]
+							}
+						]
+					},
+				]
+			},
+		],
 		where: whereOption,
 	});
 
@@ -51,11 +90,16 @@ const getAll = routeHandler(async (req, res, extras) => {
 const getById = routeHandler(async (req, res, extras) => {
 	const { claim_id } = req.params;
 
-	// /** @type {TTransfer} */
-	const designation = await findModelOrThrow({ claim_id }, Claim);
+	const claim = await findModelOrThrow({ claim_id }, Claim, {
+		include: [
+			{
+				model: Policy,
+				as: 'policy',
+			}
+		],
+	});
 
-
-	return res.sendRes(designation, { message: 'Claim loaded successfully', status: STATUS_CODE.OK });
+	return res.sendRes(claim, { message: 'Claim loaded successfully', status: STATUS_CODE.OK });
 }, false);
 
 const updateById = routeHandler(async (req, res, extras) => {

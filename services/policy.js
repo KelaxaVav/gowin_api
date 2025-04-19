@@ -11,10 +11,11 @@ class PolicyService {
      * @returns 
      */
     static async createModal({ policy_no, age, chassis_no, yom, cpa, gvw, cc, seating, kw, odp,
-        net_premium, issued_date, tp_start_date, od_start_date, insured_name, mobile_no,
+        net_premium, issued_date, tp_start_date, od_start_date, insured_name, insured_id, mobile_no,
         email_id, reg_no, tpp, gross_premium, reg_date, tp_expiry_date, od_expiry_date,
         product_id, partner_id, loginId_id, is_active }, extras) {
-        // Validation.nullParameters([insurer_id, make_modal_id, name]);
+
+        Validation.nullParameters([policy_no]);
 
         await findModelAndThrow({ policy_no }, Policy);
 
@@ -34,6 +35,7 @@ class PolicyService {
             tp_start_date,
             od_start_date,
             insured_name,
+            insured_id,
             mobile_no,
             email_id,
             reg_no,
