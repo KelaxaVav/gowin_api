@@ -6,11 +6,12 @@ const ClaimService = require("../../services/claim");
 const { whereSearchAndFilter } = require("../../helper/common");
 
 const create = routeHandler(async (req, res, extras) => {
-	const { intimate_by, accident_date, claim_intimation_date, surveyar_name,
+	const { policy_id, intimate_by, accident_date, claim_intimation_date, surveyar_name,
 		surveyar_mobile, claim_approval_date, claim_settled_date, document_submitted, bill_amount,
 		liablity_amount, settle_net_amount, settle_gst_amount, settle_total_amount, status } = req.body;
 
 	const claim = await ClaimService.createClaim({
+		policy_id,
 		intimate_by,
 		accident_date,
 		claim_intimation_date,

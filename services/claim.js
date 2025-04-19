@@ -13,7 +13,7 @@ class ClaimService {
      * @param {Extras} extras 
      * @returns 
      */
-    static async createClaim({ intimate_by, accident_date, claim_intimation_date, surveyar_name,
+    static async createClaim({ policy_id, intimate_by, accident_date, claim_intimation_date, surveyar_name,
         surveyar_mobile, claim_approval_date, claim_settled_date, document_submitted, bill_amount,
         liablity_amount, settle_net_amount, settle_gst_amount, settle_total_amount, status }, extras) {
 
@@ -22,6 +22,7 @@ class ClaimService {
         const claim_no = await createUniqueNo(Claim, { prefix: 'GC' });
 
         const teams = await Claim.create({
+            policy_id,
             claim_no,
             intimate_by,
             accident_date,
